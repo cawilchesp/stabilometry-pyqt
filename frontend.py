@@ -58,9 +58,9 @@ class App(QWidget):
         screen_y = int(self.screen().availableGeometry().height() / 2 - (height / 2))
 
         if self.language_value == 0:
-            self.setWindowTitle('Test de Romberg')
+            self.setWindowTitle('Estabilometría')
         elif self.language_value == 1:
-            self.setWindowTitle("Romberg's Test")
+            self.setWindowTitle('Stabilometry')
         self.setGeometry(screen_x, screen_y, width, height)
         self.setMinimumSize(1300, 700)
         if self.theme_value:
@@ -240,27 +240,27 @@ class App(QWidget):
         # Card Parámetros Oscilación Lateral
         # ----------------------------------
         self.lateral_card = mt3.Card(self, 'lateral_card',
-            (8, 8, 208, 228), ('Lateral', 'Lateral'), 
+            (8, 8, 208, 216), ('Lateral', 'Lateral'), 
             self.theme_value, self.language_value)
 
         y_4 = 48
         self.lat_rango_label = mt3.ItemLabel(self.lateral_card, 'lat_rango_label',
             (8, y_4), ('Rango (mm)', 'Range (mm)'), self.theme_value, self.language_value)
-        y_4 += 20
+        y_4 += 16
         self.lat_rango_value = mt3.ValueLabel(self.lateral_card, 'lat_rango_value',
             (8, y_4, 192), self.theme_value)
 
         y_4 += 40
         self.lat_vel_label = mt3.ItemLabel(self.lateral_card, 'lat_vel_label',
             (8, y_4), ('Velocidad Media (mm/s)', 'Mean Velocity (mm/s)'), self.theme_value, self.language_value)
-        y_4 += 20
+        y_4 += 16
         self.lat_vel_value = mt3.ValueLabel(self.lateral_card, 'lat_vel_value',
             (8, y_4, 192), self.theme_value)
 
         y_4 += 40
         self.lat_rms_label = mt3.ItemLabel(self.lateral_card, 'lat_rms_label',
             (8, y_4), ('RMS (mm)', 'RMS (mm)'), self.theme_value, self.language_value)
-        y_4 += 20
+        y_4 += 16
         self.lat_rms_value = mt3.ValueLabel(self.lateral_card, 'lat_rms_value',
             (8, y_4, 192), self.theme_value)
 
@@ -268,27 +268,27 @@ class App(QWidget):
         # Card Parámetros Oscilación Antero-Posterior
         # -------------------------------------------
         self.antPost_card = mt3.Card(self, 'antPost_card',
-            (8, 8, 208, 228), ('Antero-Posterior', 'Antero-Posterior'), 
+            (8, 8, 208, 216), ('Antero-Posterior', 'Antero-Posterior'), 
             self.theme_value, self.language_value)
 
         y_5 = 48
         self.ap_rango_label = mt3.ItemLabel(self.antPost_card, 'ap_rango_label',
             (8, y_5), ('Rango (mm)', 'Range (mm)'), self.theme_value, self.language_value)
-        y_5 += 20
+        y_5 += 16
         self.ap_rango_value = mt3.ValueLabel(self.antPost_card, 'ap_rango_value',
             (8, y_5, 192), self.theme_value)
 
         y_5 += 40
         self.ap_vel_label = mt3.ItemLabel(self.antPost_card, 'ap_vel_label',
             (8, y_5), ('Velocidad Media (mm/s)', 'Mean Velocity (mm/s)'), self.theme_value, self.language_value)
-        y_5 += 20
+        y_5 += 16
         self.ap_vel_value = mt3.ValueLabel(self.antPost_card, 'ap_vel_value',
             (8, y_5, 192), self.theme_value)
 
         y_5 += 40
         self.ap_rms_label = mt3.ItemLabel(self.antPost_card, 'ap_rms_label',
             (8, y_5), ('RMS (mm)', 'RMS (mm)'), self.theme_value, self.language_value)
-        y_5 += 20
+        y_5 += 16
         self.ap_rms_value = mt3.ValueLabel(self.antPost_card, 'ap_rms_value',
             (8, y_5, 192), self.theme_value)
 
@@ -296,27 +296,27 @@ class App(QWidget):
         # Card Centro de Presión
         # ----------------------
         self.centro_card = mt3.Card(self, 'centro_card',
-            (8, 8, 208, 228), ('Centro de Presión', 'Center of Pressure'), 
+            (8, 8, 208, 216), ('Centro de Presión', 'Center of Pressure'), 
             self.theme_value, self.language_value)
 
         y_6 = 48
         self.cop_vel_label = mt3.ItemLabel(self.centro_card, 'cop_vel_label',
             (8, y_6), ('Velocidad Media (mm/s)', 'Mean Velocity (mm/s)'), self.theme_value, self.language_value)
-        y_6 += 20
+        y_6 += 16
         self.cop_vel_value = mt3.ValueLabel(self.centro_card, 'cop_vel_value',
             (8, y_6, 192), self.theme_value)
 
         y_6 += 40
         self.distancia_label = mt3.ItemLabel(self.centro_card, 'distancia_label',
             (8, y_6), ('Distancia Media (mm)', 'Mean Distance (mm)'), self.theme_value, self.language_value)
-        y_6 += 20
+        y_6 += 16
         self.distancia_value = mt3.ValueLabel(self.centro_card, 'distancia_value',
             (8, y_6, 192), self.theme_value)
 
         y_6 += 40
         self.frecuencia_label = mt3.ItemLabel(self.centro_card, 'frecuencia_label',
             (8, y_6), ('Frecuencia Media (Hz)', 'Mean Frequency (Hz)'), self.theme_value, self.language_value)
-        y_6 += 20
+        y_6 += 16
         self.frecuencia_value = mt3.ValueLabel(self.centro_card, 'frecuencia_value',
             (8, y_6, 192), self.theme_value)
 
@@ -324,27 +324,27 @@ class App(QWidget):
         # Card Áreas
         # ----------
         self.areas_card = mt3.Card(self, 'areas_card',
-            (8, 8, 208, 228), ('Áreas', 'Areas'), 
+            (8, 8, 208, 216), ('Áreas', 'Areas'), 
             self.theme_value, self.language_value)
 
         y_7 = 48
         self.elipse_label = mt3.ItemLabel(self.areas_card, 'elipse_label',
             (8, y_7), ('Área de la Elipse (mm²)', 'Ellipse Area (mm²)'), self.theme_value, self.language_value)
-        y_7 += 20
+        y_7 += 16
         self.elipse_value = mt3.ValueLabel(self.areas_card, 'elipse_value',
             (8, y_7, 192), self.theme_value)
 
         y_7 += 40
         self.hull_label = mt3.ItemLabel(self.areas_card, 'hull_label',
             (8, y_7), ('Área del Envolvente (mm²)', 'Hull Area (mm²)'), self.theme_value, self.language_value)
-        y_7 += 20
+        y_7 += 16
         self.hull_value = mt3.ValueLabel(self.areas_card, 'hull_value',
             (8, y_7, 192), self.theme_value)
         
         y_7 += 40
         self.pca_label = mt3.ItemLabel(self.areas_card, 'pca_label',
             (8, y_7), ('Área de la Elipse Orientada (mm²)', 'Oriented Ellipse Area (mm²)'), self.theme_value, self.language_value)
-        y_7 += 20
+        y_7 += 16
         self.pca_value = mt3.ValueLabel(self.areas_card, 'pca_value',
             (8, y_7, 192), self.theme_value)
 
@@ -352,9 +352,48 @@ class App(QWidget):
         # Card Opciones
         # -------------
         self.opciones_card = mt3.Card(self, 'opciones_card',
-            (8, 8, 208, 228), ('Opciones', 'Options'), 
+            (8, 8, 208, 168), ('Opciones', 'Options'), 
             self.theme_value, self.language_value)
 
+        y_8 = 48
+        self.foot_label = mt3.ItemLabel(self.opciones_card, 'foot_label',
+            (8, y_8), ('Señal del Pie', 'Foot Signal'), self.theme_value, self.language_value)
+        
+        y_8 += 20
+        self.left_foot_chip = mt3.Chip(self.opciones_card, 'left_foot_chip',
+            (8, y_8, 124), ('Pie Izquierdo', 'Left Foot'), ('done.png','none.png'), 
+            False, self.theme_value, self.language_value)
+        self.left_foot_chip.clicked.connect(self.on_left_foot_chip_clicked)
+
+        self.center_chip = mt3.Chip(self.opciones_card, 'center_chip',
+            (140, y_8, 144), ('Centro de Presión', 'Center of Pressure'), ('done.png','none.png'), 
+            False, self.theme_value, self.language_value)
+        self.center_chip.clicked.connect(self.on_center_chip_clicked)
+
+        self.right_foot_chip = mt3.Chip(self.opciones_card, 'right_foot_chip',
+            (292, y_8, 124), ('Pie Derecho', 'Right Foot'), ('done.png','none.png'), 
+            False, self.theme_value, self.language_value)
+        self.right_foot_chip.clicked.connect(self.on_right_foot_chip_clicked)
+
+        y_8 += 40
+        self.area_mode_label = mt3.ItemLabel(self.opciones_card, 'area_mode_label',
+            (8, y_8), ('Modo de Área', 'Area Mode'), self.theme_value, self.language_value)
+        
+        y_8 += 20
+        self.elipse_button = mt3.SegmentedButton(self.opciones_card, 'elipse_button',
+            (8, y_8, 136), ('Elipse', 'Ellipse'), ('done.png','none.png'), 'left', 
+            False, self.theme_value, self.language_value)
+        self.elipse_button.clicked.connect(self.on_elipse_button_clicked)
+
+        self.hull_button = mt3.SegmentedButton(self.opciones_card, 'hull_button',
+            (144, y_8, 136), ('Envolvente', 'Hull'), ('done.png','none.png'), 'center', 
+            False, self.theme_value, self.language_value)
+        self.hull_button.clicked.connect(self.on_hull_button_clicked)
+
+        self.oriented_button = mt3.SegmentedButton(self.opciones_card, 'oriented_button',
+            (280, y_8, 136), ('Elipse Orientada', 'Oriented Ellipse'), ('done.png','none.png'), 'right', 
+            False, self.theme_value, self.language_value)
+        self.oriented_button.clicked.connect(self.on_oriented_button_clicked)
 
         # -------------
         # Base de Datos
@@ -423,6 +462,16 @@ class App(QWidget):
         self.elipse_label.language_text(index)
         self.hull_label.language_text(index)
         self.pca_label.language_text(index)
+
+        self.opciones_card.language_text(index)
+        self.foot_label.language_text(index)
+        self.left_foot_chip.language_text(index)
+        self.center_chip.language_text(index)
+        self.right_foot_chip.language_text(index)
+        self.area_mode_label.language_text(index)
+        self.elipse_button.language_text(index)
+        self.hull_button.language_text(index)
+        self.oriented_button.language_text(index)
 
         self.settings.setValue('language', str(index))
         self.language_value = int(self.settings.value('language'))
@@ -553,6 +602,16 @@ class App(QWidget):
         self.pca_label.apply_styleSheet(state)
         self.pca_value.apply_styleSheet(state)
 
+        self.opciones_card.apply_styleSheet(state)
+        self.foot_label.apply_styleSheet(state)
+        self.left_foot_chip.apply_styleSheet(state)
+        self.center_chip.apply_styleSheet(state)
+        self.right_foot_chip.apply_styleSheet(state)
+        self.area_mode_label.apply_styleSheet(state)
+        self.elipse_button.apply_styleSheet(state)
+        self.hull_button.apply_styleSheet(state)
+        self.oriented_button.apply_styleSheet(state)
+
         self.settings.setValue('theme', f'{state}')
         self.theme_value = eval(self.settings.value('theme'))
 
@@ -636,11 +695,11 @@ class App(QWidget):
         self.right_foot_plot_card.title.resize(self.right_foot_plot_card.width() - 16, 32)
         self.right_foot_plot.setGeometry(8, 48, self.right_foot_plot_card.width()-16, self.right_foot_plot_card.height() - 56)
         
-        self.lateral_card.setGeometry(width - 432, 64, 208, 228)
-        self.antPost_card.setGeometry(width - 216, 64, 208, 228)
-        self.centro_card.setGeometry(width - 432, 300, 208, 228)
-        self.areas_card.setGeometry(width - 216, 300, 208, 228)
-        self.opciones_card.setGeometry(width - 432, 536, 424, 156)
+        self.lateral_card.setGeometry(width - 432, 64, 208, 216)
+        self.antPost_card.setGeometry(width - 216, 64, 208, 216)
+        self.centro_card.setGeometry(width - 432, 288, 208, 216)
+        self.areas_card.setGeometry(width - 216, 288, 208, 216)
+        self.opciones_card.setGeometry(width - 432, 512, 424, 168)
 
         return super().resizeEvent(a0)
 
@@ -865,291 +924,336 @@ class App(QWidget):
         self.pca_value.setText('')
 
     
-    # -----------------
-    # Funciones Estudio
-    # -----------------
-    def on_analisis_add_button_clicked(self) -> None:
-        """ Add analysis button to the database """
-        selected_file = QtWidgets.QFileDialog.getOpenFileName(None,
-                'Seleccione el archivo de datos', self.default_path,
-                'Archivos de Datos (*.csv *.txt *.emt)')[0]
+    # # -----------------
+    # # Funciones Estudio
+    # # -----------------
+    # def on_analisis_add_button_clicked(self) -> None:
+    #     """ Add analysis button to the database """
+    #     selected_file = QtWidgets.QFileDialog.getOpenFileName(None,
+    #             'Seleccione el archivo de datos', self.default_path,
+    #             'Archivos de Datos (*.csv *.txt *.emt)')[0]
 
-        if selected_file:
-            self.default_path = self.settings.setValue('default_path', str(Path(selected_file).parent))
+    #     if selected_file:
+    #         self.default_path = self.settings.setValue('default_path', str(Path(selected_file).parent))
 
-            df = pd.read_csv(selected_file, sep='\t', skiprows=43, encoding='ISO-8859-1')
+    #         df = pd.read_csv(selected_file, sep='\t', skiprows=43, encoding='ISO-8859-1')
 
-            results = backend.analisis(df)
+    #         results = backend.analisis(df)
             
-            # ----------------
-            # Gráficas Señales
-            # ----------------
-            data_lat = results['data_x']
-            data_ap = results['data_y']
-            data_t = results['data_t']
+    #         # ----------------
+    #         # Gráficas Señales
+    #         # ----------------
+    #         data_lat = results['data_x']
+    #         data_ap = results['data_y']
+    #         data_t = results['data_t']
 
-            self.data_lat_max = results['lat_max']
-            self.data_lat_t_max = results['lat_t_max']
-            self.data_lat_min = results['lat_min']
-            self.data_lat_t_min = results['lat_t_min']
+    #         self.data_lat_max = results['lat_max']
+    #         self.data_lat_t_max = results['lat_t_max']
+    #         self.data_lat_min = results['lat_min']
+    #         self.data_lat_t_min = results['lat_t_min']
 
-            self.lateral_plot.axes.cla()
-            self.lateral_plot.fig.subplots_adjust(left=0.05, bottom=0.15, right=1, top=0.95, wspace=0, hspace=0)
-            self.lateral_plot.axes.plot(data_t, data_lat, '#42A4F5')
-            self.lateral_plot.axes.plot(self.data_lat_t_max, self.data_lat_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
-            self.lateral_plot.axes.plot(self.data_lat_t_min, self.data_lat_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
-            if self.theme_value:
-                self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#000000')
-                self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#000000')
-            else:
-                self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#E5E9F0')
-                self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#E5E9F0')
-            self.lateral_plot.draw()
+    #         self.lateral_plot.axes.cla()
+    #         self.lateral_plot.fig.subplots_adjust(left=0.05, bottom=0.15, right=1, top=0.95, wspace=0, hspace=0)
+    #         self.lateral_plot.axes.plot(data_t, data_lat, '#42A4F5')
+    #         self.lateral_plot.axes.plot(self.data_lat_t_max, self.data_lat_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
+    #         self.lateral_plot.axes.plot(self.data_lat_t_min, self.data_lat_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
+    #         if self.theme_value:
+    #             self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#000000')
+    #             self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#000000')
+    #         else:
+    #             self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#E5E9F0')
+    #             self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#E5E9F0')
+    #         self.lateral_plot.draw()
 
-            self.data_ap_max = results['ap_max']
-            self.data_ap_t_max = results['ap_t_max']
-            self.data_ap_min = results['ap_min']
-            self.data_ap_t_min = results['ap_t_min']
+    #         self.data_ap_max = results['ap_max']
+    #         self.data_ap_t_max = results['ap_t_max']
+    #         self.data_ap_min = results['ap_min']
+    #         self.data_ap_t_min = results['ap_t_min']
 
-            self.antePost_plot.axes.cla()
-            self.antePost_plot.fig.subplots_adjust(left=0.05, bottom=0.15, right=1, top=0.95, wspace=0, hspace=0)
-            self.antePost_plot.axes.plot(data_t, data_ap, '#42A4F5')
-            self.antePost_plot.axes.plot(self.data_ap_t_max, self.data_ap_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
-            self.antePost_plot.axes.plot(self.data_ap_t_min, self.data_ap_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
-            if self.theme_value:
-                self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#000000')
-                self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#000000')
-            else:
-                self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#E5E9F0')
-                self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#E5E9F0')
-            self.antePost_plot.draw()
+    #         self.antePost_plot.axes.cla()
+    #         self.antePost_plot.fig.subplots_adjust(left=0.05, bottom=0.15, right=1, top=0.95, wspace=0, hspace=0)
+    #         self.antePost_plot.axes.plot(data_t, data_ap, '#42A4F5')
+    #         self.antePost_plot.axes.plot(self.data_ap_t_max, self.data_ap_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
+    #         self.antePost_plot.axes.plot(self.data_ap_t_min, self.data_ap_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
+    #         if self.theme_value:
+    #             self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#000000')
+    #             self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#000000')
+    #         else:
+    #             self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#E5E9F0')
+    #             self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#E5E9F0')
+    #         self.antePost_plot.draw()
 
-            # --------------
-            # Gráficas Áreas
-            # --------------
-            data_elipse = backend.ellipseStandard(df)
-            self.left_foot_plot.axes.cla()
-            self.left_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
-            self.left_foot_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
-            self.left_foot_plot.axes.plot(data_elipse['x'], data_elipse['y'], '#FF2D55')
-            self.left_foot_plot.axes.axis('equal')
-            self.left_foot_plot.draw()
+    #         # --------------
+    #         # Gráficas Áreas
+    #         # --------------
+    #         data_elipse = backend.ellipseStandard(df)
+    #         self.left_foot_plot.axes.cla()
+    #         self.left_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
+    #         self.left_foot_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
+    #         self.left_foot_plot.axes.plot(data_elipse['x'], data_elipse['y'], '#FF2D55')
+    #         self.left_foot_plot.axes.axis('equal')
+    #         self.left_foot_plot.draw()
 
-            data_convex = backend.convexHull(df)
-            self.centro_plot.axes.cla()
-            self.centro_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
-            self.centro_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
-            self.centro_plot.axes.fill(data_convex['x'], data_convex['y'], edgecolor='#FF2D55', fill=False, linewidth=2)
-            self.centro_plot.axes.axis('equal')
-            self.centro_plot.draw()
+    #         data_convex = backend.convexHull(df)
+    #         self.centro_plot.axes.cla()
+    #         self.centro_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
+    #         self.centro_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
+    #         self.centro_plot.axes.fill(data_convex['x'], data_convex['y'], edgecolor='#FF2D55', fill=False, linewidth=2)
+    #         self.centro_plot.axes.axis('equal')
+    #         self.centro_plot.draw()
 
-            data_pca = backend.ellipsePCA(df)
-            self.right_foot_plot.axes.cla()
-            self.right_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
-            self.right_foot_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
-            self.right_foot_plot.axes.plot(data_pca['x'], data_pca['y'], '#FF2D55')
-            self.right_foot_plot.axes.axis('equal')
-            self.right_foot_plot.draw()
+    #         data_pca = backend.ellipsePCA(df)
+    #         self.right_foot_plot.axes.cla()
+    #         self.right_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
+    #         self.right_foot_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
+    #         self.right_foot_plot.axes.plot(data_pca['x'], data_pca['y'], '#FF2D55')
+    #         self.right_foot_plot.axes.axis('equal')
+    #         self.right_foot_plot.draw()
 
-            # --------------------------
-            # Presentación de resultados
-            # --------------------------
-            self.lat_rango_value.setText(f'{results["lat_rango"]:.2f}')
-            self.lat_vel_value.setText(f'{results["lat_vel"]:.2f}')
-            self.lat_rms_value.setText(f'{results["lat_rms"]:.2f}')
+    #         # --------------------------
+    #         # Presentación de resultados
+    #         # --------------------------
+    #         self.lat_rango_value.setText(f'{results["lat_rango"]:.2f}')
+    #         self.lat_vel_value.setText(f'{results["lat_vel"]:.2f}')
+    #         self.lat_rms_value.setText(f'{results["lat_rms"]:.2f}')
 
-            self.ap_rango_value.setText(f'{results["ap_rango"]:.2f}')
-            self.ap_vel_value.setText(f'{results["ap_vel"]:.2f}')
-            self.ap_rms_value.setText(f'{results["ap_rms"]:.2f}')
+    #         self.ap_rango_value.setText(f'{results["ap_rango"]:.2f}')
+    #         self.ap_vel_value.setText(f'{results["ap_vel"]:.2f}')
+    #         self.ap_rms_value.setText(f'{results["ap_rms"]:.2f}')
 
-            self.cop_vel_value.setText(f'{results["centro_vel"]:.2f}')
-            self.distancia_value.setText(f'{results["centro_dist"]:.2f}')
-            self.frecuencia_value.setText(f'{results["centro_frec"]:.2f}')
+    #         self.cop_vel_value.setText(f'{results["centro_vel"]:.2f}')
+    #         self.distancia_value.setText(f'{results["centro_dist"]:.2f}')
+    #         self.frecuencia_value.setText(f'{results["centro_frec"]:.2f}')
 
-            self.elipse_value.setText(f'{data_elipse["area"]:.2f}')
-            self.hull_value.setText(f'{data_convex["area"]:.2f}')
-            self.pca_value.setText(f'{data_pca["area"]:.2f}')
+    #         self.elipse_value.setText(f'{data_elipse["area"]:.2f}')
+    #         self.hull_value.setText(f'{data_convex["area"]:.2f}')
+    #         self.pca_value.setText(f'{data_pca["area"]:.2f}')
 
-            # -------------
-            # Base de datos
-            # -------------
-            study_data = {
-                'id_number': self.pacientes_menu.currentText(),
-                'file_name': Path(selected_file).name,
-                'file_path': selected_file
-                }
-            self.estudios_list = backend.add_db('estudios', study_data)
+    #         # -------------
+    #         # Base de datos
+    #         # -------------
+    #         study_data = {
+    #             'id_number': self.pacientes_menu.currentText(),
+    #             'file_name': Path(selected_file).name,
+    #             'file_path': selected_file
+    #             }
+    #         self.estudios_list = backend.add_db('estudios', study_data)
             
-            self.analisis_menu.clear()
-            for data in self.estudios_list:
-                self.analisis_menu.addItem(str(data[2]))
-            self.analisis_menu.setCurrentIndex(len(self.patientes_list)-1)
+    #         self.analisis_menu.clear()
+    #         for data in self.estudios_list:
+    #             self.analisis_menu.addItem(str(data[2]))
+    #         self.analisis_menu.setCurrentIndex(len(self.patientes_list)-1)
 
-            if self.language_value == 0:
-                QtWidgets.QMessageBox.information(self, 'Datos Guardados', 'Estudio agregado a la base de datos')
-            elif self.language_value == 1:
-                QtWidgets.QMessageBox.information(self, 'Data Saved', 'Study added to database')
-        else:
-            if self.language_value == 0:
-                QtWidgets.QMessageBox.critical(self, 'Error de Datos', 'No se seleccióno un archivo para el estudio')
-            elif self.language_value == 1:
-                QtWidgets.QMessageBox.critical(self, 'Data Error', 'No file for a study was given')
+    #         if self.language_value == 0:
+    #             QtWidgets.QMessageBox.information(self, 'Datos Guardados', 'Estudio agregado a la base de datos')
+    #         elif self.language_value == 1:
+    #             QtWidgets.QMessageBox.information(self, 'Data Saved', 'Study added to database')
+    #     else:
+    #         if self.language_value == 0:
+    #             QtWidgets.QMessageBox.critical(self, 'Error de Datos', 'No se seleccióno un archivo para el estudio')
+    #         elif self.language_value == 1:
+    #             QtWidgets.QMessageBox.critical(self, 'Data Error', 'No file for a study was given')
 
 
-    def on_analisis_del_button_clicked(self) -> None:
-        """ Delete analysis button from the database """
-        current_study = self.analisis_menu.currentText()
+    # def on_analisis_del_button_clicked(self) -> None:
+    #     """ Delete analysis button from the database """
+    #     current_study = self.analisis_menu.currentText()
 
-        if current_study != '':
-            self.estudios_list = backend.delete_db('estudios', current_study)
+    #     if current_study != '':
+    #         self.estudios_list = backend.delete_db('estudios', current_study)
             
-            self.analisis_menu.clear()
-            for data in self.estudios_list:
-                self.analisis_menu.addItem(str(data[2]))
-            self.analisis_menu.setCurrentIndex(-1)
+    #         self.analisis_menu.clear()
+    #         for data in self.estudios_list:
+    #             self.analisis_menu.addItem(str(data[2]))
+    #         self.analisis_menu.setCurrentIndex(-1)
 
-            self.lateral_plot.axes.cla()
-            self.lateral_plot.draw()
-            self.antePost_plot.axes.cla()
-            self.antePost_plot.draw()
-            self.left_foot_plot.axes.cla()
-            self.left_foot_plot.draw()
-            self.centro_plot.axes.cla()
-            self.centro_plot.draw()
-            self.right_foot_plot.axes.cla()
-            self.right_foot_plot.draw()
+    #         self.lateral_plot.axes.cla()
+    #         self.lateral_plot.draw()
+    #         self.antePost_plot.axes.cla()
+    #         self.antePost_plot.draw()
+    #         self.left_foot_plot.axes.cla()
+    #         self.left_foot_plot.draw()
+    #         self.centro_plot.axes.cla()
+    #         self.centro_plot.draw()
+    #         self.right_foot_plot.axes.cla()
+    #         self.right_foot_plot.draw()
 
-            self.lat_rango_value.setText('')
-            self.lat_vel_value.setText('')
-            self.lat_rms_value.setText('')
-            self.ap_rango_value.setText('')
-            self.ap_vel_value.setText('')
-            self.ap_rms_value.setText('')
-            self.cop_vel_value.setText('')
-            self.distancia_value.setText('')
-            self.frecuencia_value.setText('')
-            self.elipse_value.setText('')
-            self.hull_value.setText('')
-            self.pca_value.setText('')
+    #         self.lat_rango_value.setText('')
+    #         self.lat_vel_value.setText('')
+    #         self.lat_rms_value.setText('')
+    #         self.ap_rango_value.setText('')
+    #         self.ap_vel_value.setText('')
+    #         self.ap_rms_value.setText('')
+    #         self.cop_vel_value.setText('')
+    #         self.distancia_value.setText('')
+    #         self.frecuencia_value.setText('')
+    #         self.elipse_value.setText('')
+    #         self.hull_value.setText('')
+    #         self.pca_value.setText('')
 
-            if self.language_value == 0:
-                QtWidgets.QMessageBox.information(self, 'Datos Guardados', 'Análisis eliminado de la base de datos')
-            elif self.language_value == 1:
-                QtWidgets.QMessageBox.information(self, 'Data Saved', 'Analysis deleted from database')
-        else:
-            if self.language_value == 0:
-                QtWidgets.QMessageBox.critical(self, 'Error de Análisis', 'No se seleccionó un análisis')
-            elif self.language_value == 1:
-                QtWidgets.QMessageBox.critical(self, 'Analysis Error', 'No analysis selected')
+    #         if self.language_value == 0:
+    #             QtWidgets.QMessageBox.information(self, 'Datos Guardados', 'Análisis eliminado de la base de datos')
+    #         elif self.language_value == 1:
+    #             QtWidgets.QMessageBox.information(self, 'Data Saved', 'Analysis deleted from database')
+    #     else:
+    #         if self.language_value == 0:
+    #             QtWidgets.QMessageBox.critical(self, 'Error de Análisis', 'No se seleccionó un análisis')
+    #         elif self.language_value == 1:
+    #             QtWidgets.QMessageBox.critical(self, 'Analysis Error', 'No analysis selected')
 
 
-    def on_analisis_menu_textActivated(self, current_study: str):
-        """ Change analysis and present results
+    # def on_analisis_menu_textActivated(self, current_study: str):
+    #     """ Change analysis and present results
         
-        Parameters
-        ----------
-        current_study: str
-            Current study text
+    #     Parameters
+    #     ----------
+    #     current_study: str
+    #         Current study text
         
-        Returns
-        -------
-        None
-        """
-        analisis_data = backend.get_db('estudios', self.pacientes_menu.currentText())
-        study_path = [item for item in analisis_data if item[2] == current_study][0][3]
+    #     Returns
+    #     -------
+    #     None
+    #     """
+    #     analisis_data = backend.get_db('estudios', self.pacientes_menu.currentText())
+    #     study_path = [item for item in analisis_data if item[2] == current_study][0][3]
 
-        df = pd.read_csv(study_path, sep='\t', skiprows=43, encoding='ISO-8859-1')
+    #     df = pd.read_csv(study_path, sep='\t', skiprows=43, encoding='ISO-8859-1')
 
-        results = backend.analisis(df)
+    #     results = backend.analisis(df)
         
-        # ----------------
-        # Gráficas Señales
-        # ----------------
-        data_lat = results['data_x']
-        data_ap = results['data_y']
-        data_t = results['data_t']
+    #     # ----------------
+    #     # Gráficas Señales
+    #     # ----------------
+    #     data_lat = results['data_x']
+    #     data_ap = results['data_y']
+    #     data_t = results['data_t']
 
-        self.data_lat_max = results['lat_max']
-        self.data_lat_t_max = results['lat_t_max']
-        self.data_lat_min = results['lat_min']
-        self.data_lat_t_min = results['lat_t_min']
+    #     self.data_lat_max = results['lat_max']
+    #     self.data_lat_t_max = results['lat_t_max']
+    #     self.data_lat_min = results['lat_min']
+    #     self.data_lat_t_min = results['lat_t_min']
 
-        self.lateral_plot.axes.cla()
-        self.lateral_plot.fig.subplots_adjust(left=0.05, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
-        self.lateral_plot.axes.plot(data_t, data_lat, '#42A4F5')
-        self.lateral_plot.axes.plot(self.data_lat_t_max, self.data_lat_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
-        self.lateral_plot.axes.plot(self.data_lat_t_min, self.data_lat_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
-        if self.theme_value:
-            self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#000000')
-            self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#000000')
-        else:
-            self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#E5E9F0')
-            self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#E5E9F0')
-        self.lateral_plot.draw()
+    #     self.lateral_plot.axes.cla()
+    #     self.lateral_plot.fig.subplots_adjust(left=0.05, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
+    #     self.lateral_plot.axes.plot(data_t, data_lat, '#42A4F5')
+    #     self.lateral_plot.axes.plot(self.data_lat_t_max, self.data_lat_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
+    #     self.lateral_plot.axes.plot(self.data_lat_t_min, self.data_lat_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
+    #     if self.theme_value:
+    #         self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#000000')
+    #         self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#000000')
+    #     else:
+    #         self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#E5E9F0')
+    #         self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#E5E9F0')
+    #     self.lateral_plot.draw()
 
-        self.data_ap_max = results['ap_max']
-        self.data_ap_t_max = results['ap_t_max']
-        self.data_ap_min = results['ap_min']
-        self.data_ap_t_min = results['ap_t_min']
+    #     self.data_ap_max = results['ap_max']
+    #     self.data_ap_t_max = results['ap_t_max']
+    #     self.data_ap_min = results['ap_min']
+    #     self.data_ap_t_min = results['ap_t_min']
 
-        self.antePost_plot.axes.cla()
-        self.antePost_plot.fig.subplots_adjust(left=0.05, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
-        self.antePost_plot.axes.plot(data_t, data_ap, '#42A4F5')
-        self.antePost_plot.axes.plot(self.data_ap_t_max, self.data_ap_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
-        self.antePost_plot.axes.plot(self.data_ap_t_min, self.data_ap_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
-        if self.theme_value:
-            self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#000000')
-            self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#000000')
-        else:
-            self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#E5E9F0')
-            self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#E5E9F0')
-        self.antePost_plot.draw()
+    #     self.antePost_plot.axes.cla()
+    #     self.antePost_plot.fig.subplots_adjust(left=0.05, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
+    #     self.antePost_plot.axes.plot(data_t, data_ap, '#42A4F5')
+    #     self.antePost_plot.axes.plot(self.data_ap_t_max, self.data_ap_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
+    #     self.antePost_plot.axes.plot(self.data_ap_t_min, self.data_ap_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
+    #     if self.theme_value:
+    #         self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#000000')
+    #         self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#000000')
+    #     else:
+    #         self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#E5E9F0')
+    #         self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#E5E9F0')
+    #     self.antePost_plot.draw()
 
-        # --------------
-        # Gráficas Áreas
-        # --------------
-        data_elipse = backend.ellipseStandard(df)
-        self.left_foot_plot.axes.cla()
-        self.left_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
-        self.left_foot_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
-        self.left_foot_plot.axes.plot(data_elipse['x'], data_elipse['y'], '#FF2D55')
-        self.left_foot_plot.axes.axis('equal')
-        self.left_foot_plot.draw()
+    #     # --------------
+    #     # Gráficas Áreas
+    #     # --------------
+    #     data_elipse = backend.ellipseStandard(df)
+    #     self.left_foot_plot.axes.cla()
+    #     self.left_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
+    #     self.left_foot_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
+    #     self.left_foot_plot.axes.plot(data_elipse['x'], data_elipse['y'], '#FF2D55')
+    #     self.left_foot_plot.axes.axis('equal')
+    #     self.left_foot_plot.draw()
 
-        data_convex = backend.convexHull(df)
-        self.centro_plot.axes.cla()
-        self.centro_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
-        self.centro_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
-        self.centro_plot.axes.fill(data_convex['x'], data_convex['y'], edgecolor='#FF2D55', fill=False, linewidth=2)
-        self.centro_plot.axes.axis('equal')
-        self.centro_plot.draw()
+    #     data_convex = backend.convexHull(df)
+    #     self.centro_plot.axes.cla()
+    #     self.centro_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
+    #     self.centro_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
+    #     self.centro_plot.axes.fill(data_convex['x'], data_convex['y'], edgecolor='#FF2D55', fill=False, linewidth=2)
+    #     self.centro_plot.axes.axis('equal')
+    #     self.centro_plot.draw()
 
-        data_pca = backend.ellipsePCA(df)
-        self.right_foot_plot.axes.cla()
-        self.right_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
-        self.right_foot_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
-        self.right_foot_plot.axes.plot(data_pca['x'], data_pca['y'], '#FF2D55')
-        self.right_foot_plot.axes.axis('equal')
-        self.right_foot_plot.draw()
+    #     data_pca = backend.ellipsePCA(df)
+    #     self.right_foot_plot.axes.cla()
+    #     self.right_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
+    #     self.right_foot_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
+    #     self.right_foot_plot.axes.plot(data_pca['x'], data_pca['y'], '#FF2D55')
+    #     self.right_foot_plot.axes.axis('equal')
+    #     self.right_foot_plot.draw()
 
-        # --------------------------
-        # Presentación de resultados
-        # --------------------------
-        self.lat_rango_value.setText(f'{results["lat_rango"]:.2f}')
-        self.lat_vel_value.setText(f'{results["lat_vel"]:.2f}')
-        self.lat_rms_value.setText(f'{results["lat_rms"]:.2f}')
+    #     # --------------------------
+    #     # Presentación de resultados
+    #     # --------------------------
+    #     self.lat_rango_value.setText(f'{results["lat_rango"]:.2f}')
+    #     self.lat_vel_value.setText(f'{results["lat_vel"]:.2f}')
+    #     self.lat_rms_value.setText(f'{results["lat_rms"]:.2f}')
 
-        self.ap_rango_value.setText(f'{results["ap_rango"]:.2f}')
-        self.ap_vel_value.setText(f'{results["ap_vel"]:.2f}')
-        self.ap_rms_value.setText(f'{results["ap_rms"]:.2f}')
+    #     self.ap_rango_value.setText(f'{results["ap_rango"]:.2f}')
+    #     self.ap_vel_value.setText(f'{results["ap_vel"]:.2f}')
+    #     self.ap_rms_value.setText(f'{results["ap_rms"]:.2f}')
 
-        self.cop_vel_value.setText(f'{results["centro_vel"]:.2f}')
-        self.distancia_value.setText(f'{results["centro_dist"]:.2f}')
-        self.frecuencia_value.setText(f'{results["centro_frec"]:.2f}')
+    #     self.cop_vel_value.setText(f'{results["centro_vel"]:.2f}')
+    #     self.distancia_value.setText(f'{results["centro_dist"]:.2f}')
+    #     self.frecuencia_value.setText(f'{results["centro_frec"]:.2f}')
 
-        self.elipse_value.setText(f'{data_elipse["area"]:.2f}')
-        self.hull_value.setText(f'{data_convex["area"]:.2f}')
-        self.pca_value.setText(f'{data_pca["area"]:.2f}')
+    #     self.elipse_value.setText(f'{data_elipse["area"]:.2f}')
+    #     self.hull_value.setText(f'{data_convex["area"]:.2f}')
+    #     self.pca_value.setText(f'{data_pca["area"]:.2f}')
+
+
+    # ------------------
+    # Funciones Opciones
+    # ------------------
+    def on_left_foot_chip_clicked(self) -> None:
+        """ Left foot option for chip filter """
+        if self.left_foot_chip.isChecked(): self.left_foot_chip.set_state(True)
+        else: self.left_foot_chip.set_state(False)
+
+    
+    def on_center_chip_clicked(self) -> None:
+        """ Center of pressure option for chip filter """
+        if self.center_chip.isChecked(): self.center_chip.set_state(True)
+        else: self.center_chip.set_state(False)
+
+
+    def on_right_foot_chip_clicked(self) -> None:
+        """ Right foot option for chip filter """
+        if self.right_foot_chip.isChecked(): self.right_foot_chip.set_state(True)
+        else: self.right_foot_chip.set_state(False)
+
+
+    def on_elipse_button_clicked(self) -> None:
+        """ Ellipse option for segmented buttons """
+        self.elipse_button.set_state(True)
+        
+        if self.hull_button.isChecked(): self.hull_button.set_state(False)
+        if self.oriented_button.isChecked(): self.oriented_button.set_state(False)
+
+
+    def on_hull_button_clicked(self) -> None:
+        """ Hull option for segmented buttons """
+        self.hull_button.set_state(True)
+        
+        if self.elipse_button.isChecked(): self.elipse_button.set_state(False)
+        if self.oriented_button.isChecked(): self.oriented_button.set_state(False)
+
+
+    def on_oriented_button_clicked(self) -> None:
+        """ Oriented ellipse for segmented buttons """
+        self.oriented_button.set_state(True)
+        
+        if self.hull_button.isChecked(): self.hull_button.set_state(False)
+        if self.elipse_button.isChecked(): self.elipse_button.set_state(False)
 
 
 if __name__=="__main__":
