@@ -11,6 +11,7 @@ from PyQt6.QtCore import QSettings
 import sys
 import pandas as pd
 from pathlib import Path
+import cv2
 
 import material3_components as mt3
 import backend
@@ -144,7 +145,7 @@ class App(QWidget):
         self.analisis_menu = mt3.Menu(self.analisis_card, 'analisis_menu',
             (8, y_2, 164), 10, 10, {}, self.theme_value, self.language_value)
         self.analisis_menu.setEnabled(False)
-        self.analisis_menu.textActivated.connect(self.on_analisis_menu_textActivated)
+        # self.analisis_menu.textActivated.connect(self.on_analisis_menu_textActivated)
 
         y_2 += 40
         self.analisis_add_button = mt3.IconButton(self.analisis_card, 'analisis_add_button',
@@ -155,7 +156,7 @@ class App(QWidget):
         self.analisis_del_button = mt3.IconButton(self.analisis_card, 'analisis_del_button',
             (140, y_2), 'delete.png', self.theme_value)
         self.analisis_del_button.setEnabled(False)
-        self.analisis_del_button.clicked.connect(self.on_analisis_del_button_clicked)
+        # self.analisis_del_button.clicked.connect(self.on_analisis_del_button_clicked)
 
         # ----------------
         # Card Información
@@ -678,11 +679,11 @@ class App(QWidget):
         self.lateral_plot_card.setGeometry(196, 64, width - 636, int(height * 0.25))
         self.lateral_plot_card.title.resize(width - 652, 32)
         self.lateral_plot.setGeometry(8, 48, self.lateral_plot_card.width()-16, self.lateral_plot_card.height()-56)
-        
+
         self.antePost_plot_card.setGeometry(196, int(72 + (height * 0.25)), width - 636, int(height * 0.25))
         self.antePost_plot_card.title.resize(width - 652, 32)
         self.antePost_plot.setGeometry(8, 48, self.antePost_plot_card.width()-16, self.antePost_plot_card.height()-56)
-        
+
         self.left_foot_plot_card.setGeometry(196, int(80 + (height * 0.5)), int((width - 652) / 3), int(height - (88 + (height * 0.5))))
         self.left_foot_plot_card.title.resize(self.left_foot_plot_card.width() - 16, 32)
         self.left_foot_plot.setGeometry(8, 48, self.left_foot_plot_card.width()-16, self.left_foot_plot_card.height()-56)
@@ -893,22 +894,22 @@ class App(QWidget):
         self.analisis_del_button.setEnabled(True)
         self.analisis_menu.setEnabled(True)
 
-        self.estudios_list = backend.get_db('estudios', current_pacient)
-        self.analisis_menu.clear()
-        for data in self.estudios_list:
-            self.analisis_menu.addItem(str(data[2]))
-        self.analisis_menu.setCurrentIndex(-1)
+        # self.estudios_list = backend.get_db('estudios', current_pacient)
+        # self.analisis_menu.clear()
+        # for data in self.estudios_list:
+        #     self.analisis_menu.addItem(str(data[2]))
+        # self.analisis_menu.setCurrentIndex(-1)
 
-        self.lateral_plot.axes.cla()
-        self.lateral_plot.draw()
-        self.antePost_plot.axes.cla()
-        self.antePost_plot.draw()
-        self.left_foot_plot.axes.cla()
-        self.left_foot_plot.draw()
-        self.centro_plot.axes.cla()
-        self.centro_plot.draw()
-        self.right_foot_plot.axes.cla()
-        self.right_foot_plot.draw()
+        # self.lateral_plot.axes.cla()
+        # self.lateral_plot.draw()
+        # self.antePost_plot.axes.cla()
+        # self.antePost_plot.draw()
+        # self.left_foot_plot.axes.cla()
+        # self.left_foot_plot.draw()
+        # self.centro_plot.axes.cla()
+        # self.centro_plot.draw()
+        # self.right_foot_plot.axes.cla()
+        # self.right_foot_plot.draw()
 
         self.lat_rango_value.setText('')
         self.lat_vel_value.setText('')
@@ -924,25 +925,36 @@ class App(QWidget):
         self.pca_value.setText('')
 
     
-    # # -----------------
-    # # Funciones Estudio
-    # # -----------------
-    # def on_analisis_add_button_clicked(self) -> None:
-    #     """ Add analysis button to the database """
-    #     selected_file = QtWidgets.QFileDialog.getOpenFileName(None,
-    #             'Seleccione el archivo de datos', self.default_path,
-    #             'Archivos de Datos (*.csv *.txt *.emt)')[0]
+    # ------------------
+    # Funciones Análisis
+    # ------------------
+    def on_analisis_add_button_clicked(self) -> None:
+        """ Add analysis button to the database """
+        selected_file = QtWidgets.QFileDialog.getOpenFileName(None,
+                'Seleccione la imagen de datos', self.default_path,
+                'Archivos de Imágenes (*.png *.jpg *.bmp)')[0]
 
-    #     if selected_file:
-    #         self.default_path = self.settings.setValue('default_path', str(Path(selected_file).parent))
+        if selected_file:
+            self.default_path = self.settings.setValue('default_path', str(Path(selected_file).parent))
 
-    #         df = pd.read_csv(selected_file, sep='\t', skiprows=43, encoding='ISO-8859-1')
+            results = backend.extract(selected_file)
+            data_l_lat = results['left_lateral_signal']
+            data_t_l_lat = results['left_lateral_time']
+            data_c_lat = results['center_lateral_signal']
+            data_t_c_lat = results['center_lateral_time']
+            data_r_lat = results['right_lateral_signal']
+            data_t_r_lat = results['right_lateral_time']
 
-    #         results = backend.analisis(df)
-            
-    #         # ----------------
-    #         # Gráficas Señales
-    #         # ----------------
+            data_l_ap = results['left_ap_signal']
+            data_t_l_ap = results['left_ap_time']
+            data_c_ap = results['center_ap_signal']
+            data_t_c_ap = results['center_ap_time']
+            data_r_ap = results['right_ap_signal']
+            data_t_r_ap = results['right_ap_time']
+
+            # ----------------
+            # Gráficas Señales
+            # ----------------
     #         data_lat = results['data_x']
     #         data_ap = results['data_y']
     #         data_t = results['data_t']
@@ -952,9 +964,11 @@ class App(QWidget):
     #         self.data_lat_min = results['lat_min']
     #         self.data_lat_t_min = results['lat_t_min']
 
-    #         self.lateral_plot.axes.cla()
-    #         self.lateral_plot.fig.subplots_adjust(left=0.05, bottom=0.15, right=1, top=0.95, wspace=0, hspace=0)
-    #         self.lateral_plot.axes.plot(data_t, data_lat, '#42A4F5')
+            self.lateral_plot.axes.cla()
+            self.lateral_plot.fig.subplots_adjust(left=0.05, bottom=0.15, right=1, top=0.95, wspace=0, hspace=0)
+            self.lateral_plot.axes.plot(data_t_l_lat, data_l_lat, '#FF0000')
+            self.lateral_plot.axes.plot(data_t_c_lat, data_c_lat, '#00FF00')
+            self.lateral_plot.axes.plot(data_t_r_lat, data_r_lat, '#0000FF')
     #         self.lateral_plot.axes.plot(self.data_lat_t_max, self.data_lat_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
     #         self.lateral_plot.axes.plot(self.data_lat_t_min, self.data_lat_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
     #         if self.theme_value:
@@ -963,25 +977,27 @@ class App(QWidget):
     #         else:
     #             self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#E5E9F0')
     #             self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#E5E9F0')
-    #         self.lateral_plot.draw()
+            self.lateral_plot.draw()
 
     #         self.data_ap_max = results['ap_max']
     #         self.data_ap_t_max = results['ap_t_max']
     #         self.data_ap_min = results['ap_min']
     #         self.data_ap_t_min = results['ap_t_min']
 
-    #         self.antePost_plot.axes.cla()
-    #         self.antePost_plot.fig.subplots_adjust(left=0.05, bottom=0.15, right=1, top=0.95, wspace=0, hspace=0)
-    #         self.antePost_plot.axes.plot(data_t, data_ap, '#42A4F5')
-    #         self.antePost_plot.axes.plot(self.data_ap_t_max, self.data_ap_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
-    #         self.antePost_plot.axes.plot(self.data_ap_t_min, self.data_ap_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
-    #         if self.theme_value:
-    #             self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#000000')
-    #             self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#000000')
-    #         else:
-    #             self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#E5E9F0')
-    #             self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#E5E9F0')
-    #         self.antePost_plot.draw()
+            self.antePost_plot.axes.cla()
+            self.antePost_plot.fig.subplots_adjust(left=0.05, bottom=0.15, right=1, top=0.95, wspace=0, hspace=0)
+            self.antePost_plot.axes.plot(data_t_l_ap, data_l_ap, '#FF0000') # 42A4F5
+            self.antePost_plot.axes.plot(data_t_c_ap, data_c_ap, '#00FF00')
+            self.antePost_plot.axes.plot(data_t_r_ap, data_r_ap, '#0000FF')
+            # self.antePost_plot.axes.plot(self.data_ap_t_max, self.data_ap_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
+            # self.antePost_plot.axes.plot(self.data_ap_t_min, self.data_ap_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
+            # if self.theme_value:
+            #     self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#000000')
+            #     self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#000000')
+            # else:
+            #     self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#E5E9F0')
+            #     self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#E5E9F0')
+            self.antePost_plot.draw()
 
     #         # --------------
     #         # Gráficas Áreas
