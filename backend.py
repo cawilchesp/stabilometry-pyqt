@@ -10,8 +10,6 @@ This file contains supplementary methods and classes applied to the frontend.
 
 """
 
-from tkinter import CENTER
-from unittest import signals
 from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt, QSettings
@@ -136,30 +134,24 @@ def image_ocr(image):
 
 
 def image_signal(image, limits):
-    rango = limits[0] - limits[1]
-    t_signal = [-1]
-    y_signal = [-1]
+    rango = float(limits[0] - limits[1])
+    signal = [(-1, -1)]
     data = cv2.findNonZero(image)
     data = sorted(data, key=lambda k: [k[0][0], k[0][1]])
-    data = [-1 * x for x in data]
-    y_min = float(min(data , key=lambda k: k[0][1])[0][1])
-    data = [x - y_min for x in data]
+    data = [(x[0][0], float(-x[0][1])) for x in data]
+    y_min = float(min(data , key=lambda k: k[1])[1])
+    data = [(x[0], x[1] - y_min) for x in data]
+    y_max = float(max(data , key=lambda k: k[1])[1])
+    data = [(x[0], (x[1] / y_max * rango) + limits[1]) for x in data]
 
     for element in data:
-        if t_signal[-1] != element[0][0]:
-            temp = float(element[0][1])
-            # temp = temp - y_min
-            # temp = temp / y_max
-            # temp = temp + 1
-            # temp = temp * rango
-            
-            t_signal.append(float(element[0][0]))
-            y_signal.append(temp)
+        if signal[-1][0] != element[0]:        
+            signal.append((float(element[0]), float(element[1])))
 
-    y = pd.DataFrame(y_signal)
-    t = pd.DataFrame(t_signal)
+    y = pd.DataFrame(signal)[1]
+    t = pd.DataFrame(signal)[0]
 
-    return y[1:],t[1:]
+    return y[1:], t[1:]
 
 
 def extract(image_file: str) -> pd.DataFrame:
@@ -221,33 +213,6 @@ def extract(image_file: str) -> pd.DataFrame:
         }
 
     return signals
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # --------------------
