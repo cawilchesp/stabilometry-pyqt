@@ -17,6 +17,8 @@ from PyQt6.QtCore import Qt, QSettings
 import sys
 import numpy as np
 import pandas as pd
+from collections import OrderedDict
+
 from scipy.spatial import ConvexHull
 import psycopg2
 import cv2
@@ -135,18 +137,19 @@ def image_ocr(image):
 
 def image_signal(image, limits):
     rango = float(limits[0] - limits[1])
-    signal = [(-1, -1)]
     data = cv2.findNonZero(image)
     data = sorted(data, key=lambda k: [k[0][0], k[0][1]])
     data = [(x[0][0], float(-x[0][1])) for x in data]
-    y_min = float(min(data , key=lambda k: k[1])[1])
-    data = [(x[0], x[1] - y_min) for x in data]
-    y_max = float(max(data , key=lambda k: k[1])[1])
-    data = [(x[0], (x[1] / y_max * rango) + limits[1]) for x in data]
 
-    for element in data:
-        if signal[-1][0] != element[0]:        
-            signal.append((float(element[0]), float(element[1])))
+    signal = OrderedDict()
+    for x, y in data:
+        signal.setdefault(x, []).append(y)
+    signal = [(k, sum(v) / len(v)) for k, v in signal.items()]
+
+    y_min = float(min(signal , key=lambda k: k[1])[1])
+    signal = [(x[0], x[1] - y_min) for x in signal]
+    y_max = float(max(signal , key=lambda k: k[1])[1])
+    signal = [(x[0], (x[1] / y_max * rango) + limits[1]) for x in signal]
 
     y = pd.DataFrame(signal)[1]
     t = pd.DataFrame(signal)[0]
