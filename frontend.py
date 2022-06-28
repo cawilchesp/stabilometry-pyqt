@@ -7,7 +7,7 @@ This file contains main UI class and methods to control components operations.
 from turtle import back
 from PyQt6 import QtGui, QtWidgets, QtCore
 from PyQt6.QtWidgets import QWidget, QApplication
-from PyQt6.QtCore import QSettings
+from PyQt6.QtCore import QSettings, Qt
 
 import sys
 import pandas as pd
@@ -261,24 +261,59 @@ class App(QWidget):
         y_4 += 16
         self.left_lat_rango_value = mt3.ValueLabel(self.lateral_card, 'left_lat_rango_value',
             (8, y_4, 64), self.theme_value)
+        self.left_lat_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_lat_rango_value.setStyleSheet(f'QLabel#{self.left_lat_rango_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
         self.center_lat_rango_value = mt3.ValueLabel(self.lateral_card, 'center_lat_rango_value',
             (72, y_4, 64), self.theme_value)
+        self.center_lat_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_lat_rango_value.setStyleSheet(f'QLabel#{self.center_lat_rango_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
         self.right_lat_rango_value = mt3.ValueLabel(self.lateral_card, 'right_lat_rango_value',
             (136, y_4, 64), self.theme_value)
+        self.right_lat_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_lat_rango_value.setStyleSheet(f'QLabel#{self.right_lat_rango_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         y_4 += 40
         self.lat_vel_label = mt3.ItemLabel(self.lateral_card, 'lat_vel_label',
             (8, y_4), ('Velocidad Media (mm/s)', 'Mean Velocity (mm/s)'), self.theme_value, self.language_value)
         y_4 += 16
-        self.lat_vel_value = mt3.ValueLabel(self.lateral_card, 'lat_vel_value',
-            (8, y_4, 192), self.theme_value)
+        self.left_lat_vel_value = mt3.ValueLabel(self.lateral_card, 'left_lat_vel_value',
+            (8, y_4, 64), self.theme_value)
+        self.left_lat_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_lat_vel_value.setStyleSheet(f'QLabel#{self.left_lat_vel_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_lat_vel_value = mt3.ValueLabel(self.lateral_card, 'center_lat_vel_value',
+            (72, y_4, 64), self.theme_value)
+        self.center_lat_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_lat_vel_value.setStyleSheet(f'QLabel#{self.center_lat_vel_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_lat_vel_value = mt3.ValueLabel(self.lateral_card, 'right_lat_vel_value',
+            (136, y_4, 64), self.theme_value)
+        self.right_lat_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_lat_vel_value.setStyleSheet(f'QLabel#{self.right_lat_vel_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         y_4 += 40
         self.lat_rms_label = mt3.ItemLabel(self.lateral_card, 'lat_rms_label',
             (8, y_4), ('RMS (mm)', 'RMS (mm)'), self.theme_value, self.language_value)
         y_4 += 16
-        self.lat_rms_value = mt3.ValueLabel(self.lateral_card, 'lat_rms_value',
-            (8, y_4, 192), self.theme_value)
+        self.left_lat_rms_value = mt3.ValueLabel(self.lateral_card, 'left_lat_rms_value',
+            (8, y_4, 64), self.theme_value)
+        self.left_lat_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_lat_rms_value.setStyleSheet(f'QLabel#{self.left_lat_rms_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_lat_rms_value = mt3.ValueLabel(self.lateral_card, 'center_lat_rms_value',
+            (72, y_4, 64), self.theme_value)
+        self.center_lat_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_lat_rms_value.setStyleSheet(f'QLabel#{self.center_lat_rms_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_lat_rms_value = mt3.ValueLabel(self.lateral_card, 'right_lat_rms_value',
+            (136, y_4, 64), self.theme_value)
+        self.right_lat_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_lat_rms_value.setStyleSheet(f'QLabel#{self.right_lat_rms_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         # -------------------------------------------
         # Card Parámetros Oscilación Antero-Posterior
@@ -291,22 +326,61 @@ class App(QWidget):
         self.ap_rango_label = mt3.ItemLabel(self.antPost_card, 'ap_rango_label',
             (8, y_5), ('Rango (mm)', 'Range (mm)'), self.theme_value, self.language_value)
         y_5 += 16
-        self.ap_rango_value = mt3.ValueLabel(self.antPost_card, 'ap_rango_value',
-            (8, y_5, 192), self.theme_value)
+        self.left_ap_rango_value = mt3.ValueLabel(self.antPost_card, 'left_ap_rango_value',
+            (8, y_5, 64), self.theme_value)
+        self.left_ap_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_ap_rango_value.setStyleSheet(f'QLabel#{self.left_ap_rango_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_ap_rango_value = mt3.ValueLabel(self.antPost_card, 'center_ap_rango_value',
+            (72, y_5, 64), self.theme_value)
+        self.center_ap_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_ap_rango_value.setStyleSheet(f'QLabel#{self.center_ap_rango_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_ap_rango_value = mt3.ValueLabel(self.antPost_card, 'right_ap_rango_value',
+            (136, y_5, 64), self.theme_value)
+        self.right_ap_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_ap_rango_value.setStyleSheet(f'QLabel#{self.right_ap_rango_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         y_5 += 40
         self.ap_vel_label = mt3.ItemLabel(self.antPost_card, 'ap_vel_label',
             (8, y_5), ('Velocidad Media (mm/s)', 'Mean Velocity (mm/s)'), self.theme_value, self.language_value)
         y_5 += 16
-        self.ap_vel_value = mt3.ValueLabel(self.antPost_card, 'ap_vel_value',
-            (8, y_5, 192), self.theme_value)
+        self.left_ap_vel_value = mt3.ValueLabel(self.antPost_card, 'left_ap_vel_value',
+            (8, y_5, 64), self.theme_value)
+        self.left_ap_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_ap_vel_value.setStyleSheet(f'QLabel#{self.left_ap_vel_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_ap_vel_value = mt3.ValueLabel(self.antPost_card, 'center_ap_vel_value',
+            (72, y_5, 64), self.theme_value)
+        self.center_ap_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_ap_vel_value.setStyleSheet(f'QLabel#{self.center_ap_vel_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_ap_vel_value = mt3.ValueLabel(self.antPost_card, 'right_ap_vel_value',
+            (136, y_5, 64), self.theme_value)
+        self.right_ap_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_ap_vel_value.setStyleSheet(f'QLabel#{self.right_ap_vel_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         y_5 += 40
         self.ap_rms_label = mt3.ItemLabel(self.antPost_card, 'ap_rms_label',
             (8, y_5), ('RMS (mm)', 'RMS (mm)'), self.theme_value, self.language_value)
         y_5 += 16
-        self.ap_rms_value = mt3.ValueLabel(self.antPost_card, 'ap_rms_value',
-            (8, y_5, 192), self.theme_value)
+        self.left_ap_rms_value = mt3.ValueLabel(self.antPost_card, 'left_ap_rms_value',
+            (8, y_5, 64), self.theme_value)
+        self.left_ap_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_ap_rms_value.setStyleSheet(f'QLabel#{self.left_ap_rms_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_ap_rms_value = mt3.ValueLabel(self.antPost_card, 'center_ap_rms_value',
+            (72, y_5, 64), self.theme_value)
+        self.center_ap_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_ap_rms_value.setStyleSheet(f'QLabel#{self.center_ap_rms_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_ap_rms_value = mt3.ValueLabel(self.antPost_card, 'right_ap_rms_value',
+            (136, y_5, 64), self.theme_value)
+        self.right_ap_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_ap_rms_value.setStyleSheet(f'QLabel#{self.right_ap_rms_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         # ----------------------
         # Card Centro de Presión
@@ -319,22 +393,61 @@ class App(QWidget):
         self.cop_vel_label = mt3.ItemLabel(self.centro_card, 'cop_vel_label',
             (8, y_6), ('Velocidad Media (mm/s)', 'Mean Velocity (mm/s)'), self.theme_value, self.language_value)
         y_6 += 16
-        self.cop_vel_value = mt3.ValueLabel(self.centro_card, 'cop_vel_value',
-            (8, y_6, 192), self.theme_value)
+        self.left_cop_vel_value = mt3.ValueLabel(self.centro_card, 'left_cop_vel_value',
+            (8, y_6, 64), self.theme_value)
+        self.left_cop_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_cop_vel_value.setStyleSheet(f'QLabel#{self.left_cop_vel_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_cop_vel_value = mt3.ValueLabel(self.centro_card, 'center_cop_vel_value',
+            (72, y_6, 64), self.theme_value)
+        self.center_cop_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_cop_vel_value.setStyleSheet(f'QLabel#{self.center_cop_vel_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_cop_vel_value = mt3.ValueLabel(self.centro_card, 'right_cop_vel_value',
+            (136, y_6, 64), self.theme_value)
+        self.right_cop_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_cop_vel_value.setStyleSheet(f'QLabel#{self.right_cop_vel_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         y_6 += 40
         self.distancia_label = mt3.ItemLabel(self.centro_card, 'distancia_label',
             (8, y_6), ('Distancia Media (mm)', 'Mean Distance (mm)'), self.theme_value, self.language_value)
         y_6 += 16
-        self.distancia_value = mt3.ValueLabel(self.centro_card, 'distancia_value',
-            (8, y_6, 192), self.theme_value)
+        self.left_distancia_value = mt3.ValueLabel(self.centro_card, 'left_distancia_value',
+            (8, y_6, 64), self.theme_value)
+        self.left_distancia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_distancia_value.setStyleSheet(f'QLabel#{self.left_distancia_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_distancia_value = mt3.ValueLabel(self.centro_card, 'center_distancia_value',
+            (72, y_6, 64), self.theme_value)
+        self.center_distancia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_distancia_value.setStyleSheet(f'QLabel#{self.center_distancia_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_distancia_value = mt3.ValueLabel(self.centro_card, 'right_distancia_value',
+            (136, y_6, 64), self.theme_value)
+        self.right_distancia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_distancia_value.setStyleSheet(f'QLabel#{self.right_distancia_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         y_6 += 40
         self.frecuencia_label = mt3.ItemLabel(self.centro_card, 'frecuencia_label',
             (8, y_6), ('Frecuencia Media (Hz)', 'Mean Frequency (Hz)'), self.theme_value, self.language_value)
         y_6 += 16
-        self.frecuencia_value = mt3.ValueLabel(self.centro_card, 'frecuencia_value',
-            (8, y_6, 192), self.theme_value)
+        self.left_frecuencia_value = mt3.ValueLabel(self.centro_card, 'left_frecuencia_value',
+            (8, y_6, 64), self.theme_value)
+        self.left_frecuencia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_frecuencia_value.setStyleSheet(f'QLabel#{self.left_frecuencia_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_frecuencia_value = mt3.ValueLabel(self.centro_card, 'center_frecuencia_value',
+            (72, y_6, 64), self.theme_value)
+        self.center_frecuencia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_frecuencia_value.setStyleSheet(f'QLabel#{self.center_frecuencia_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_frecuencia_value = mt3.ValueLabel(self.centro_card, 'right_frecuencia_value',
+            (136, y_6, 64), self.theme_value)
+        self.right_frecuencia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_frecuencia_value.setStyleSheet(f'QLabel#{self.right_frecuencia_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         # ----------
         # Card Áreas
@@ -347,22 +460,61 @@ class App(QWidget):
         self.elipse_label = mt3.ItemLabel(self.areas_card, 'elipse_label',
             (8, y_7), ('Área de la Elipse (mm²)', 'Ellipse Area (mm²)'), self.theme_value, self.language_value)
         y_7 += 16
-        self.elipse_value = mt3.ValueLabel(self.areas_card, 'elipse_value',
-            (8, y_7, 192), self.theme_value)
+        self.left_elipse_value = mt3.ValueLabel(self.areas_card, 'left_elipse_value',
+            (8, y_7, 64), self.theme_value)
+        self.left_elipse_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_elipse_value.setStyleSheet(f'QLabel#{self.left_elipse_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_elipse_value = mt3.ValueLabel(self.areas_card, 'center_elipse_value',
+            (72, y_7, 64), self.theme_value)
+        self.center_elipse_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_elipse_value.setStyleSheet(f'QLabel#{self.center_elipse_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_elipse_value = mt3.ValueLabel(self.areas_card, 'right_elipse_value',
+            (136, y_7, 64), self.theme_value)
+        self.right_elipse_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_elipse_value.setStyleSheet(f'QLabel#{self.right_elipse_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         y_7 += 40
         self.hull_label = mt3.ItemLabel(self.areas_card, 'hull_label',
             (8, y_7), ('Área del Envolvente (mm²)', 'Hull Area (mm²)'), self.theme_value, self.language_value)
         y_7 += 16
-        self.hull_value = mt3.ValueLabel(self.areas_card, 'hull_value',
-            (8, y_7, 192), self.theme_value)
+        self.left_hull_value = mt3.ValueLabel(self.areas_card, 'left_hull_value',
+            (8, y_7, 64), self.theme_value)
+        self.left_hull_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_hull_value.setStyleSheet(f'QLabel#{self.left_hull_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_hull_value = mt3.ValueLabel(self.areas_card, 'center_hull_value',
+            (72, y_7, 64), self.theme_value)
+        self.center_hull_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_hull_value.setStyleSheet(f'QLabel#{self.center_hull_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_hull_value = mt3.ValueLabel(self.areas_card, 'right_hull_value',
+            (136, y_7, 64), self.theme_value)
+        self.right_hull_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_hull_value.setStyleSheet(f'QLabel#{self.right_hull_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
         
         y_7 += 40
         self.pca_label = mt3.ItemLabel(self.areas_card, 'pca_label',
             (8, y_7), ('Área de la Elipse Orientada (mm²)', 'Oriented Ellipse Area (mm²)'), self.theme_value, self.language_value)
         y_7 += 16
-        self.pca_value = mt3.ValueLabel(self.areas_card, 'pca_value',
-            (8, y_7, 192), self.theme_value)
+        self.left_pca_value = mt3.ValueLabel(self.areas_card, 'left_pca_value',
+            (8, y_7, 64), self.theme_value)
+        self.left_pca_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_pca_value.setStyleSheet(f'QLabel#{self.left_pca_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_pca_value = mt3.ValueLabel(self.areas_card, 'center_pca_value',
+            (72, y_7, 64), self.theme_value)
+        self.center_pca_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_pca_value.setStyleSheet(f'QLabel#{self.center_pca_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_pca_value = mt3.ValueLabel(self.areas_card, 'right_pca_value',
+            (136, y_7, 64), self.theme_value)
+        self.right_pca_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_pca_value.setStyleSheet(f'QLabel#{self.right_pca_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         # -------------
         # Card Opciones
@@ -557,66 +709,202 @@ class App(QWidget):
         self.centro_plot_card.apply_styleSheet(state)
         self.right_foot_plot_card.apply_styleSheet(state)
 
-        self.lateral_plot.apply_styleSheet(state)
-        if self.lat_text_1:
-            self.lat_text_1.remove()
-            self.lat_text_2.remove()
-            if state:
-                self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#000000')
-                self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#000000')
-            else:
-                self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#E5E9F0')
-                self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#E5E9F0')
-        self.lateral_plot.draw()
-        self.antePost_plot.apply_styleSheet(state)
-        if self.ap_text_1:
-            self.ap_text_1.remove()
-            self.ap_text_2.remove()
-            if state:
-                self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#000000')
-                self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#000000')
-            else:
-                self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#E5E9F0')
-                self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#E5E9F0')
-        self.antePost_plot.draw()
-        self.left_foot_plot.apply_styleSheet(state)
-        self.left_foot_plot.draw()
-        self.centro_plot.apply_styleSheet(state)
-        self.centro_plot.draw()
-        self.right_foot_plot.apply_styleSheet(state)
-        self.right_foot_plot.draw()
+        # self.lateral_plot.apply_styleSheet(state)
+        # if self.lat_text_1:
+        #     self.lat_text_1.remove()
+        #     self.lat_text_2.remove()
+        #     if state:
+        #         self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#000000')
+        #         self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#000000')
+        #     else:
+        #         self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#E5E9F0')
+        #         self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#E5E9F0')
+        # self.lateral_plot.draw()
+        # self.antePost_plot.apply_styleSheet(state)
+        # if self.ap_text_1:
+        #     self.ap_text_1.remove()
+        #     self.ap_text_2.remove()
+        #     if state:
+        #         self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#000000')
+        #         self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#000000')
+        #     else:
+        #         self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#E5E9F0')
+        #         self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#E5E9F0')
+        # self.antePost_plot.draw()
+        # self.left_foot_plot.apply_styleSheet(state)
+        # self.left_foot_plot.draw()
+        # self.centro_plot.apply_styleSheet(state)
+        # self.centro_plot.draw()
+        # self.right_foot_plot.apply_styleSheet(state)
+        # self.right_foot_plot.draw()
 
         self.lateral_card.apply_styleSheet(state)
         self.lat_rango_label.apply_styleSheet(state)
-        self.lat_rango_value.apply_styleSheet(state)
+        self.left_lat_rango_value.apply_styleSheet(state)
+        self.center_lat_rango_value.apply_styleSheet(state)
+        self.right_lat_rango_value.apply_styleSheet(state)
         self.lat_vel_label.apply_styleSheet(state)
-        self.lat_vel_value.apply_styleSheet(state)
+        self.left_lat_vel_value.apply_styleSheet(state)
+        self.center_lat_vel_value.apply_styleSheet(state)
+        self.right_lat_vel_value.apply_styleSheet(state)
         self.lat_rms_label.apply_styleSheet(state)
-        self.lat_rms_value.apply_styleSheet(state)
+        self.left_lat_rms_value.apply_styleSheet(state)
+        self.center_lat_rms_value.apply_styleSheet(state)
+        self.right_lat_rms_value.apply_styleSheet(state)
+
+        self.left_lat_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_lat_rango_value.setStyleSheet(f'QLabel#{self.left_lat_rango_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_lat_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_lat_rango_value.setStyleSheet(f'QLabel#{self.center_lat_rango_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_lat_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_lat_rango_value.setStyleSheet(f'QLabel#{self.right_lat_rango_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
+        self.left_lat_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_lat_vel_value.setStyleSheet(f'QLabel#{self.left_lat_vel_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_lat_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_lat_vel_value.setStyleSheet(f'QLabel#{self.center_lat_vel_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_lat_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_lat_vel_value.setStyleSheet(f'QLabel#{self.right_lat_vel_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
+        self.left_lat_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_lat_rms_value.setStyleSheet(f'QLabel#{self.left_lat_rms_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_lat_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_lat_rms_value.setStyleSheet(f'QLabel#{self.center_lat_rms_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_lat_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_lat_rms_value.setStyleSheet(f'QLabel#{self.right_lat_rms_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         self.antPost_card.apply_styleSheet(state)
         self.ap_rango_label.apply_styleSheet(state)
-        self.ap_rango_value.apply_styleSheet(state)
+        self.left_ap_rango_value.apply_styleSheet(state)
+        self.center_ap_rango_value.apply_styleSheet(state)
+        self.right_ap_rango_value.apply_styleSheet(state)
         self.ap_vel_label.apply_styleSheet(state)
-        self.ap_vel_value.apply_styleSheet(state)
+        self.left_ap_vel_value.apply_styleSheet(state)
+        self.center_ap_vel_value.apply_styleSheet(state)
+        self.right_ap_vel_value.apply_styleSheet(state)
         self.ap_rms_label.apply_styleSheet(state)
-        self.ap_rms_value.apply_styleSheet(state)
+        self.left_ap_rms_value.apply_styleSheet(state)
+        self.center_ap_rms_value.apply_styleSheet(state)
+        self.right_ap_rms_value.apply_styleSheet(state)
+
+        self.left_ap_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_ap_rango_value.setStyleSheet(f'QLabel#{self.left_ap_rango_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_ap_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_ap_rango_value.setStyleSheet(f'QLabel#{self.center_ap_rango_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_ap_rango_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_ap_rango_value.setStyleSheet(f'QLabel#{self.right_ap_rango_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
+        self.left_ap_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_ap_vel_value.setStyleSheet(f'QLabel#{self.left_ap_vel_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_ap_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_ap_vel_value.setStyleSheet(f'QLabel#{self.center_ap_vel_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_ap_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_ap_vel_value.setStyleSheet(f'QLabel#{self.right_ap_vel_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
+        self.left_ap_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_ap_rms_value.setStyleSheet(f'QLabel#{self.left_ap_rms_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_ap_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_ap_rms_value.setStyleSheet(f'QLabel#{self.center_ap_rms_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_ap_rms_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_ap_rms_value.setStyleSheet(f'QLabel#{self.right_ap_rms_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         self.centro_card.apply_styleSheet(state)
         self.cop_vel_label.apply_styleSheet(state)
-        self.cop_vel_value.apply_styleSheet(state)
+        self.left_cop_vel_value.apply_styleSheet(state)
+        self.center_cop_vel_value.apply_styleSheet(state)
+        self.right_cop_vel_value.apply_styleSheet(state)
         self.distancia_label.apply_styleSheet(state)
-        self.distancia_value.apply_styleSheet(state)
+        self.left_distancia_value.apply_styleSheet(state)
+        self.center_distancia_value.apply_styleSheet(state)
+        self.right_distancia_value.apply_styleSheet(state)
         self.frecuencia_label.apply_styleSheet(state)
-        self.frecuencia_value.apply_styleSheet(state)
+        self.left_frecuencia_value.apply_styleSheet(state)
+        self.center_frecuencia_value.apply_styleSheet(state)
+        self.right_frecuencia_value.apply_styleSheet(state)
+
+        self.left_cop_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_cop_vel_value.setStyleSheet(f'QLabel#{self.left_cop_vel_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_cop_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_cop_vel_value.setStyleSheet(f'QLabel#{self.center_cop_vel_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_cop_vel_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_cop_vel_value.setStyleSheet(f'QLabel#{self.right_cop_vel_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
+        self.left_distancia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_distancia_value.setStyleSheet(f'QLabel#{self.left_distancia_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_distancia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_distancia_value.setStyleSheet(f'QLabel#{self.center_distancia_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_distancia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_distancia_value.setStyleSheet(f'QLabel#{self.right_distancia_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
+        self.left_frecuencia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_frecuencia_value.setStyleSheet(f'QLabel#{self.left_frecuencia_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_frecuencia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_frecuencia_value.setStyleSheet(f'QLabel#{self.center_frecuencia_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_frecuencia_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_frecuencia_value.setStyleSheet(f'QLabel#{self.right_frecuencia_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         self.areas_card.apply_styleSheet(state)
         self.elipse_label.apply_styleSheet(state)
-        self.elipse_value.apply_styleSheet(state)
+        self.left_elipse_value.apply_styleSheet(state)
+        self.center_elipse_value.apply_styleSheet(state)
+        self.right_elipse_value.apply_styleSheet(state)
         self.hull_label.apply_styleSheet(state)
-        self.hull_value.apply_styleSheet(state)
+        self.left_hull_value.apply_styleSheet(state)
+        self.center_hull_value.apply_styleSheet(state)
+        self.right_hull_value.apply_styleSheet(state)
         self.pca_label.apply_styleSheet(state)
-        self.pca_value.apply_styleSheet(state)
+        self.left_pca_value.apply_styleSheet(state)
+        self.center_pca_value.apply_styleSheet(state)
+        self.right_pca_value.apply_styleSheet(state)
+
+        self.left_elipse_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_elipse_value.setStyleSheet(f'QLabel#{self.left_elipse_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_elipse_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_elipse_value.setStyleSheet(f'QLabel#{self.center_elipse_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_elipse_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_elipse_value.setStyleSheet(f'QLabel#{self.right_elipse_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
+        self.left_hull_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_hull_value.setStyleSheet(f'QLabel#{self.left_hull_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_hull_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_hull_value.setStyleSheet(f'QLabel#{self.center_hull_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_hull_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_hull_value.setStyleSheet(f'QLabel#{self.right_hull_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
+        self.left_pca_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_pca_value.setStyleSheet(f'QLabel#{self.left_pca_value.name} {{'
+            f'border: 2px solid #FF0000; border-radius: 16 }}')
+        self.center_pca_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.center_pca_value.setStyleSheet(f'QLabel#{self.center_pca_value.name} {{'
+            f'border: 2px solid #00FF00; border-radius: 16 }}')
+        self.right_pca_value.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_pca_value.setStyleSheet(f'QLabel#{self.right_pca_value.name} {{'
+            f'border: 2px solid #0000FF; border-radius: 16 }}')
 
         self.opciones_card.apply_styleSheet(state)
         self.foot_label.apply_styleSheet(state)
@@ -929,18 +1217,42 @@ class App(QWidget):
         self.left_lat_rango_value.setText('')
         self.center_lat_rango_value.setText('')
         self.right_lat_rango_value.setText('')
+        self.left_lat_vel_value.setText('')
+        self.center_lat_vel_value.setText('')
+        self.right_lat_vel_value.setText('')
+        self.left_lat_rms_value.setText('')
+        self.center_lat_rms_value.setText('')
+        self.right_lat_rms_value.setText('')
 
-        self.lat_vel_value.setText('')
-        self.lat_rms_value.setText('')
-        self.ap_rango_value.setText('')
-        self.ap_vel_value.setText('')
-        self.ap_rms_value.setText('')
-        self.cop_vel_value.setText('')
-        self.distancia_value.setText('')
-        self.frecuencia_value.setText('')
-        self.elipse_value.setText('')
-        self.hull_value.setText('')
-        self.pca_value.setText('')
+        self.left_ap_rango_value.setText('')
+        self.center_ap_rango_value.setText('')
+        self.right_ap_rango_value.setText('')
+        self.left_ap_vel_value.setText('')
+        self.center_ap_vel_value.setText('')
+        self.right_ap_vel_value.setText('')
+        self.left_ap_rms_value.setText('')
+        self.center_ap_rms_value.setText('')
+        self.right_ap_rms_value.setText('')
+
+        self.left_cop_vel_value.setText('')
+        self.center_cop_vel_value.setText('')
+        self.right_cop_vel_value.setText('')
+        self.left_distancia_value.setText('')
+        self.center_distancia_value.setText('')
+        self.right_distancia_value.setText('')
+        self.left_frecuencia_value.setText('')
+        self.center_frecuencia_value.setText('')
+        self.right_frecuencia_value.setText('')
+
+        self.left_elipse_value.setText('')
+        self.center_elipse_value.setText('')
+        self.right_elipse_value.setText('')
+        self.left_hull_value.setText('')
+        self.center_hull_value.setText('')
+        self.right_hull_value.setText('')
+        self.left_pca_value.setText('')
+        self.center_pca_value.setText('')
+        self.right_pca_value.setText('')
 
     
     # ------------------
@@ -1059,27 +1371,44 @@ class App(QWidget):
             # Presentación de resultados
             # --------------------------
             self.left_lat_rango_value.setText(f'{left_analysis["lat_rango"]:.2f}')
-            self.left_lat_rango_value.setStyleSheet(f'QLabel#{self.left_lat_rango_value.name} {{ border: 2px solid #FF0000 }}')
             self.center_lat_rango_value.setText(f'{center_analysis["lat_rango"]:.2f}')
-            self.center_lat_rango_value.setStyleSheet(f'QLabel#{self.center_lat_rango_value.name} {{ border: 2px solid #00FF00 }}')
             self.right_lat_rango_value.setText(f'{right_analysis["lat_rango"]:.2f}')
-            self.right_lat_rango_value.setStyleSheet(f'QLabel#{self.right_lat_rango_value.name} {{ border: 2px solid #0000FF }}')
+            self.left_lat_vel_value.setText(f'{left_analysis["lat_vel"]:.2f}')
+            self.center_lat_vel_value.setText(f'{center_analysis["lat_vel"]:.2f}')
+            self.right_lat_vel_value.setText(f'{right_analysis["lat_vel"]:.2f}')
+            self.left_lat_rms_value.setText(f'{left_analysis["lat_rms"]:.2f}')
+            self.center_lat_rms_value.setText(f'{center_analysis["lat_rms"]:.2f}')
+            self.right_lat_rms_value.setText(f'{right_analysis["lat_rms"]:.2f}')
 
+            self.left_ap_rango_value.setText(f'{left_analysis["ap_rango"]:.2f}')
+            self.center_ap_rango_value.setText(f'{center_analysis["ap_rango"]:.2f}')
+            self.right_ap_rango_value.setText(f'{right_analysis["ap_rango"]:.2f}')
+            self.left_ap_vel_value.setText(f'{left_analysis["ap_vel"]:.2f}')
+            self.center_ap_vel_value.setText(f'{center_analysis["ap_vel"]:.2f}')
+            self.right_ap_vel_value.setText(f'{right_analysis["ap_vel"]:.2f}')
+            self.left_ap_rms_value.setText(f'{left_analysis["ap_rms"]:.2f}')
+            self.center_ap_rms_value.setText(f'{center_analysis["ap_rms"]:.2f}')
+            self.right_ap_rms_value.setText(f'{right_analysis["ap_rms"]:.2f}')
 
-    #         self.lat_vel_value.setText(f'{results["lat_vel"]:.2f}')
-    #         self.lat_rms_value.setText(f'{results["lat_rms"]:.2f}')
+            self.left_cop_vel_value.setText(f'{left_analysis["centro_vel"]:.2f}')
+            self.center_cop_vel_value.setText(f'{center_analysis["centro_vel"]:.2f}')
+            self.right_cop_vel_value.setText(f'{right_analysis["centro_vel"]:.2f}')
+            self.left_distancia_value.setText(f'{left_analysis["centro_dist"]:.2f}')
+            self.center_distancia_value.setText(f'{center_analysis["centro_dist"]:.2f}')
+            self.right_distancia_value.setText(f'{right_analysis["centro_dist"]:.2f}')
+            self.left_frecuencia_value.setText(f'{left_analysis["centro_frec"]:.2f}')
+            self.center_frecuencia_value.setText(f'{center_analysis["centro_frec"]:.2f}')
+            self.right_frecuencia_value.setText(f'{right_analysis["centro_frec"]:.2f}')
 
-            # self.ap_rango_value.setText(f'{results["ap_rango"]:.2f}')
-    #         self.ap_vel_value.setText(f'{results["ap_vel"]:.2f}')
-    #         self.ap_rms_value.setText(f'{results["ap_rms"]:.2f}')
-
-    #         self.cop_vel_value.setText(f'{results["centro_vel"]:.2f}')
-    #         self.distancia_value.setText(f'{results["centro_dist"]:.2f}')
-    #         self.frecuencia_value.setText(f'{results["centro_frec"]:.2f}')
-
-    #         self.elipse_value.setText(f'{data_elipse["area"]:.2f}')
-    #         self.hull_value.setText(f'{data_convex["area"]:.2f}')
-    #         self.pca_value.setText(f'{data_pca["area"]:.2f}')
+            # self.left_elipse_value.setText(f'{data_elipse["area"]:.2f}')
+            # self.center_elipse_value.setText(f'{data_elipse["area"]:.2f}')
+            # self.right_elipse_value.setText(f'{data_elipse["area"]:.2f}')
+            # self.left_hull_value.setText(f'{data_convex["area"]:.2f}')
+            # self.center_hull_value.setText(f'{data_convex["area"]:.2f}')
+            # self.right_hull_value.setText(f'{data_convex["area"]:.2f}')
+            # self.left_pca_value.setText(f'{data_pca["area"]:.2f}')
+            # self.center_pca_value.setText(f'{data_pca["area"]:.2f}')
+            # self.right_pca_value.setText(f'{data_pca["area"]:.2f}')
 
     #         # -------------
     #         # Base de datos
