@@ -10,6 +10,7 @@ This file contains supplementary methods and classes applied to the frontend.
 
 """
 
+from turtle import width
 from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt, QSettings
@@ -136,6 +137,7 @@ def image_ocr(image):
 
 
 def image_signal(image, limits):
+    width = image.shape[1]
     rango = float(limits[0] - limits[1])
     data = cv2.findNonZero(image)
     data = sorted(data, key=lambda k: [k[0][0], k[0][1]])
@@ -145,6 +147,19 @@ def image_signal(image, limits):
     for x, y in data:
         signal.setdefault(x, []).append(y)
     signal = [(k, sum(v) / len(v)) for k, v in signal.items()]
+
+    temp = []
+    index_signal = 0
+    for i in range(width):
+        if i == signal[index_signal][0]:
+            temp.append((i,signal[index_signal][1]))
+            index_signal += 1
+        else:
+            temp.append((i,np.nan))
+
+    df_temp = pd.DataFrame(temp)
+    df_temp.interpolate(method='linear', limit_direction='both', inplace=True)
+    signal = list(df_temp.to_records(index=False))
 
     y_min = float(min(signal , key=lambda k: k[1])[1])
     signal = [(x[0], x[1] - y_min) for x in signal]
