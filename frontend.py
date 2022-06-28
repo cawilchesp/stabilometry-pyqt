@@ -4,6 +4,7 @@ Frontend
 This file contains main UI class and methods to control components operations.
 """
 
+from turtle import back
 from PyQt6 import QtGui, QtWidgets, QtCore
 from PyQt6.QtWidgets import QWidget, QApplication
 from PyQt6.QtCore import QSettings
@@ -11,7 +12,6 @@ from PyQt6.QtCore import QSettings
 import sys
 import pandas as pd
 from pathlib import Path
-import cv2
 
 import material3_components as mt3
 import backend
@@ -49,6 +49,17 @@ class App(QWidget):
         self.lat_text_2 = None
         self.ap_text_1 = None
         self.ap_text_2 = None
+
+        self.left_analysis = None
+        self.center_analysis = None
+        self.right_analysis = None
+
+        self.left_lateral_plot = None
+        self.center_lateral_plot = None
+        self.right_lateral_plot = None
+        self.left_ap_plot = None
+        self.center_ap_plot = None
+        self.right_ap_plot = None
 
         # ----------------
         # Generación de UI
@@ -248,8 +259,12 @@ class App(QWidget):
         self.lat_rango_label = mt3.ItemLabel(self.lateral_card, 'lat_rango_label',
             (8, y_4), ('Rango (mm)', 'Range (mm)'), self.theme_value, self.language_value)
         y_4 += 16
-        self.lat_rango_value = mt3.ValueLabel(self.lateral_card, 'lat_rango_value',
-            (8, y_4, 192), self.theme_value)
+        self.left_lat_rango_value = mt3.ValueLabel(self.lateral_card, 'left_lat_rango_value',
+            (8, y_4, 64), self.theme_value)
+        self.center_lat_rango_value = mt3.ValueLabel(self.lateral_card, 'center_lat_rango_value',
+            (72, y_4, 64), self.theme_value)
+        self.right_lat_rango_value = mt3.ValueLabel(self.lateral_card, 'right_lat_rango_value',
+            (136, y_4, 64), self.theme_value)
 
         y_4 += 40
         self.lat_vel_label = mt3.ItemLabel(self.lateral_card, 'lat_vel_label',
@@ -911,7 +926,10 @@ class App(QWidget):
         # self.right_foot_plot.axes.cla()
         # self.right_foot_plot.draw()
 
-        self.lat_rango_value.setText('')
+        self.left_lat_rango_value.setText('')
+        self.center_lat_rango_value.setText('')
+        self.right_lat_rango_value.setText('')
+
         self.lat_vel_value.setText('')
         self.lat_rms_value.setText('')
         self.ap_rango_value.setText('')
@@ -937,38 +955,45 @@ class App(QWidget):
         if selected_file:
             self.default_path = self.settings.setValue('default_path', str(Path(selected_file).parent))
 
-            results = backend.extract(selected_file)
-            data_l_lat = results['left_lateral_signal']
-            data_t_l_lat = results['left_lateral_time']
-            data_c_lat = results['center_lateral_signal']
-            data_t_c_lat = results['center_lateral_time']
-            data_r_lat = results['right_lateral_signal']
-            data_t_r_lat = results['right_lateral_time']
+            extracted_signals = backend.extract(selected_file)
+            self.data_l_lat = extracted_signals['left_lateral_signal']
+            self.data_t_l_lat = extracted_signals['left_lateral_time']
+            self.data_c_lat = extracted_signals['center_lateral_signal']
+            self.data_t_c_lat = extracted_signals['center_lateral_time']
+            self.data_r_lat = extracted_signals['right_lateral_signal']
+            self.data_t_r_lat = extracted_signals['right_lateral_time']
 
-            data_l_ap = results['left_ap_signal']
-            data_t_l_ap = results['left_ap_time']
-            data_c_ap = results['center_ap_signal']
-            data_t_c_ap = results['center_ap_time']
-            data_r_ap = results['right_ap_signal']
-            data_t_r_ap = results['right_ap_time']
+            self.data_l_ap = extracted_signals['left_ap_signal']
+            self.data_t_l_ap = extracted_signals['left_ap_time']
+            self.data_c_ap = extracted_signals['center_ap_signal']
+            self.data_t_c_ap = extracted_signals['center_ap_time']
+            self.data_r_ap = extracted_signals['right_ap_signal']
+            self.data_t_r_ap = extracted_signals['right_ap_time']
+
+            # -------------------
+            # Análisis de Señales
+            # -------------------
+            left_data = pd.merge(self.data_l_lat, self.data_l_ap, right_index = True, left_index = True)
+            center_data = pd.merge(self.data_c_lat, self.data_c_ap, right_index = True, left_index = True)
+            right_data = pd.merge(self.data_r_lat, self.data_r_ap, right_index = True, left_index = True)
+
+            left_analysis = backend.analisis(left_data)
+            center_analysis = backend.analisis(center_data)
+            right_analysis = backend.analisis(right_data)
+
+            # self.data_lat_max = results['lat_max']
+            # self.data_lat_t_max = results['lat_t_max']
+            # self.data_lat_min = results['lat_min']
+            # self.data_lat_t_min = results['lat_t_min']
 
             # ----------------
             # Gráficas Señales
             # ----------------
-    #         data_lat = results['data_x']
-    #         data_ap = results['data_y']
-    #         data_t = results['data_t']
-
-    #         self.data_lat_max = results['lat_max']
-    #         self.data_lat_t_max = results['lat_t_max']
-    #         self.data_lat_min = results['lat_min']
-    #         self.data_lat_t_min = results['lat_t_min']
-
             self.lateral_plot.axes.cla()
             self.lateral_plot.fig.subplots_adjust(left=0.05, bottom=0.15, right=1, top=0.95, wspace=0, hspace=0)
-            self.lateral_plot.axes.plot(data_t_l_lat, data_l_lat, '#FF0000')
-            self.lateral_plot.axes.plot(data_t_c_lat, data_c_lat, '#00FF00')
-            self.lateral_plot.axes.plot(data_t_r_lat, data_r_lat, '#0000FF')
+            self.left_lateral_plot = self.lateral_plot.axes.plot(self.data_t_l_lat, self.data_l_lat, '#FF0000')
+            self.center_lateral_plot = self.lateral_plot.axes.plot(self.data_t_c_lat, self.data_c_lat, '#00FF00')
+            self.right_lateral_plot = self.lateral_plot.axes.plot(self.data_t_r_lat, self.data_r_lat, '#0000FF')
     #         self.lateral_plot.axes.plot(self.data_lat_t_max, self.data_lat_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
     #         self.lateral_plot.axes.plot(self.data_lat_t_min, self.data_lat_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
     #         if self.theme_value:
@@ -979,16 +1004,16 @@ class App(QWidget):
     #             self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#E5E9F0')
             self.lateral_plot.draw()
 
-    #         self.data_ap_max = results['ap_max']
-    #         self.data_ap_t_max = results['ap_t_max']
-    #         self.data_ap_min = results['ap_min']
-    #         self.data_ap_t_min = results['ap_t_min']
+            # self.data_ap_max = results['ap_max']
+            # self.data_ap_t_max = results['ap_t_max']
+            # self.data_ap_min = results['ap_min']
+            # self.data_ap_t_min = results['ap_t_min']
 
             self.antePost_plot.axes.cla()
             self.antePost_plot.fig.subplots_adjust(left=0.05, bottom=0.15, right=1, top=0.95, wspace=0, hspace=0)
-            self.antePost_plot.axes.plot(data_t_l_ap, data_l_ap, '#FF0000') # 42A4F5
-            self.antePost_plot.axes.plot(data_t_c_ap, data_c_ap, '#00FF00')
-            self.antePost_plot.axes.plot(data_t_r_ap, data_r_ap, '#0000FF')
+            self.left_ap_plot = self.antePost_plot.axes.plot(self.data_t_l_ap, self.data_l_ap, '#FF0000') # 42A4F5
+            self.center_ap_plot = self.antePost_plot.axes.plot(self.data_t_c_ap, self.data_c_ap, '#00FF00')
+            self.right_ap_plot = self.antePost_plot.axes.plot(self.data_t_r_ap, self.data_r_ap, '#0000FF')
             # self.antePost_plot.axes.plot(self.data_ap_t_max, self.data_ap_max, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
             # self.antePost_plot.axes.plot(self.data_ap_t_min, self.data_ap_min, marker="o", markersize=3, markeredgecolor='#FF2D55', markerfacecolor='#FF2D55')
             # if self.theme_value:
@@ -999,41 +1024,52 @@ class App(QWidget):
             #     self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#E5E9F0')
             self.antePost_plot.draw()
 
-    #         # --------------
-    #         # Gráficas Áreas
-    #         # --------------
-    #         data_elipse = backend.ellipseStandard(df)
+            # --------------
+            # Gráficas Áreas
+            # --------------
+    # #         data_elipse = backend.ellipseStandard(df)
     #         self.left_foot_plot.axes.cla()
     #         self.left_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
-    #         self.left_foot_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
-    #         self.left_foot_plot.axes.plot(data_elipse['x'], data_elipse['y'], '#FF2D55')
+    #         self.left_foot_plot.axes.scatter(self.data_l_lat, self.data_l_ap, marker='.', color='#FF0000')
+    #         # self.left_foot_plot.axes.plot(data_elipse['x'], data_elipse['y'], '#FF2D55')
     #         self.left_foot_plot.axes.axis('equal')
     #         self.left_foot_plot.draw()
 
-    #         data_convex = backend.convexHull(df)
+    # #         data_convex = backend.convexHull(df)
     #         self.centro_plot.axes.cla()
     #         self.centro_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
-    #         self.centro_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
-    #         self.centro_plot.axes.fill(data_convex['x'], data_convex['y'], edgecolor='#FF2D55', fill=False, linewidth=2)
+    #         self.centro_plot.axes.scatter(self.data_c_lat, self.data_c_ap, marker='.', color='#00FF00')
+    #         # self.centro_plot.axes.fill(data_convex['x'], data_convex['y'], edgecolor='#FF2D55', fill=False, linewidth=2)
     #         self.centro_plot.axes.axis('equal')
     #         self.centro_plot.draw()
 
-    #         data_pca = backend.ellipsePCA(df)
+    # #         data_pca = backend.ellipsePCA(df)
     #         self.right_foot_plot.axes.cla()
     #         self.right_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
-    #         self.right_foot_plot.axes.scatter(data_lat, data_ap, marker='.', color='#42A4F5')
-    #         self.right_foot_plot.axes.plot(data_pca['x'], data_pca['y'], '#FF2D55')
+    #         self.right_foot_plot.axes.scatter(self.data_r_lat, self.data_r_ap, marker='.', color='#0000FF')
+    #         # self.right_foot_plot.axes.plot(data_pca['x'], data_pca['y'], '#FF2D55')
     #         self.right_foot_plot.axes.axis('equal')
     #         self.right_foot_plot.draw()
 
-    #         # --------------------------
-    #         # Presentación de resultados
-    #         # --------------------------
-    #         self.lat_rango_value.setText(f'{results["lat_rango"]:.2f}')
+            self.left_foot_chip.set_state(True)
+            self.center_chip.set_state(True)
+            self.right_foot_chip.set_state(True)
+
+            # --------------------------
+            # Presentación de resultados
+            # --------------------------
+            self.left_lat_rango_value.setText(f'{left_analysis["lat_rango"]:.2f}')
+            self.left_lat_rango_value.setStyleSheet(f'QLabel#{self.left_lat_rango_value.name} {{ border: 2px solid #FF0000 }}')
+            self.center_lat_rango_value.setText(f'{center_analysis["lat_rango"]:.2f}')
+            self.center_lat_rango_value.setStyleSheet(f'QLabel#{self.center_lat_rango_value.name} {{ border: 2px solid #00FF00 }}')
+            self.right_lat_rango_value.setText(f'{right_analysis["lat_rango"]:.2f}')
+            self.right_lat_rango_value.setStyleSheet(f'QLabel#{self.right_lat_rango_value.name} {{ border: 2px solid #0000FF }}')
+
+
     #         self.lat_vel_value.setText(f'{results["lat_vel"]:.2f}')
     #         self.lat_rms_value.setText(f'{results["lat_rms"]:.2f}')
 
-    #         self.ap_rango_value.setText(f'{results["ap_rango"]:.2f}')
+            # self.ap_rango_value.setText(f'{results["ap_rango"]:.2f}')
     #         self.ap_vel_value.setText(f'{results["ap_vel"]:.2f}')
     #         self.ap_rms_value.setText(f'{results["ap_rms"]:.2f}')
 
@@ -1210,7 +1246,7 @@ class App(QWidget):
     #     # --------------------------
     #     # Presentación de resultados
     #     # --------------------------
-    #     self.lat_rango_value.setText(f'{results["lat_rango"]:.2f}')
+        # self.lat_rango_value.setText(f'{left_analysis["lat_rango"]:.2f}')
     #     self.lat_vel_value.setText(f'{results["lat_vel"]:.2f}')
     #     self.lat_rms_value.setText(f'{results["lat_rms"]:.2f}')
 
@@ -1232,20 +1268,50 @@ class App(QWidget):
     # ------------------
     def on_left_foot_chip_clicked(self) -> None:
         """ Left foot option for chip filter """
-        if self.left_foot_chip.isChecked(): self.left_foot_chip.set_state(True)
-        else: self.left_foot_chip.set_state(False)
+        if self.left_foot_chip.isChecked():
+            self.left_foot_chip.set_state(True)
+            self.left_lateral_plot = self.lateral_plot.axes.plot(self.data_t_l_lat, self.data_l_lat, '#FF0000')
+            self.left_ap_plot = self.antePost_plot.axes.plot(self.data_t_l_ap, self.data_l_ap, '#FF0000')
+        else: 
+            self.left_foot_chip.set_state(False)
+            line_lat = self.left_lateral_plot.pop(0)
+            line_lat.remove()
+            line_ap = self.left_ap_plot.pop(0)
+            line_ap.remove()
+        self.lateral_plot.draw()
+        self.antePost_plot.draw()
 
     
     def on_center_chip_clicked(self) -> None:
         """ Center of pressure option for chip filter """
-        if self.center_chip.isChecked(): self.center_chip.set_state(True)
-        else: self.center_chip.set_state(False)
+        if self.center_chip.isChecked():
+            self.center_chip.set_state(True)
+            self.center_lateral_plot = self.lateral_plot.axes.plot(self.data_t_c_lat, self.data_c_lat, '#00FF00')
+            self.center_ap_plot = self.antePost_plot.axes.plot(self.data_t_c_ap, self.data_c_ap, '#00FF00')
+        else:
+            self.center_chip.set_state(False)
+            line_lat = self.center_lateral_plot.pop(0)
+            line_lat.remove()
+            line_ap = self.center_ap_plot.pop(0)
+            line_ap.remove()
+        self.lateral_plot.draw()
+        self.antePost_plot.draw()
 
 
     def on_right_foot_chip_clicked(self) -> None:
         """ Right foot option for chip filter """
-        if self.right_foot_chip.isChecked(): self.right_foot_chip.set_state(True)
-        else: self.right_foot_chip.set_state(False)
+        if self.right_foot_chip.isChecked():
+            self.right_foot_chip.set_state(True)
+            self.right_lateral_plot = self.lateral_plot.axes.plot(self.data_t_r_lat, self.data_r_lat, '#0000FF')
+            self.right_ap_plot = self.antePost_plot.axes.plot(self.data_t_r_ap, self.data_r_ap, '#0000FF')
+        else:
+            self.right_foot_chip.set_state(False)
+            line_lat = self.right_lateral_plot.pop(0)
+            line_lat.remove()
+            line_ap = self.right_ap_plot.pop(0)
+            line_ap.remove()
+        self.lateral_plot.draw()
+        self.antePost_plot.draw()
 
 
     def on_elipse_button_clicked(self) -> None:
