@@ -1701,9 +1701,18 @@ class App(QWidget):
 
         if self.oriented_button.isChecked():
             self.oriented_button.set_state(False)
-
-
-        
+            if self.left_pca_plot:
+                line_lat = self.left_pca_plot.pop(0)
+                line_lat.remove()
+                self.left_foot_plot.draw()
+            if self.center_pca_plot:
+                line_lat = self.center_pca_plot.pop(0)
+                line_lat.remove()
+                self.centro_plot.draw()
+            if self.right_pca_plot:
+                line_lat = self.right_pca_plot.pop(0)
+                line_lat.remove()
+                self.right_foot_plot.draw()
 
 
     def on_hull_button_clicked(self) -> None:
@@ -1716,12 +1725,35 @@ class App(QWidget):
         self.right_hull_plot = self.right_foot_plot.axes.fill(self.right_data_convex['x'], self.right_data_convex['y'], edgecolor='#FF2D55', fill=False, linewidth=2)
         self.right_foot_plot.draw()
         
-        if self.elipse_button.isChecked(): self.elipse_button.set_state(False)
-        if self.oriented_button.isChecked(): self.oriented_button.set_state(False)
+        if self.elipse_button.isChecked():
+            self.elipse_button.set_state(False)
+            if self.left_ellipse_plot:
+                line_lat = self.left_ellipse_plot.pop(0)
+                line_lat.remove()
+                self.left_foot_plot.draw()
+            if self.center_ellipse_plot:
+                line_lat = self.center_ellipse_plot.pop(0)
+                line_lat.remove()
+                self.centro_plot.draw()
+            if self.right_ellipse_plot:
+                line_lat = self.right_ellipse_plot.pop(0)
+                line_lat.remove()
+                self.right_foot_plot.draw()
 
-   
-
-        
+        if self.oriented_button.isChecked():
+            self.oriented_button.set_state(False)
+            if self.left_pca_plot:
+                line_lat = self.left_pca_plot.pop(0)
+                line_lat.remove()
+                self.left_foot_plot.draw()
+            if self.center_pca_plot:
+                line_lat = self.center_pca_plot.pop(0)
+                line_lat.remove()
+                self.centro_plot.draw()
+            if self.right_pca_plot:
+                line_lat = self.right_pca_plot.pop(0)
+                line_lat.remove()
+                self.right_foot_plot.draw()
 
 
     def on_oriented_button_clicked(self) -> None:
@@ -1734,8 +1766,36 @@ class App(QWidget):
         self.right_pca_plot = self.right_foot_plot.axes.plot(self.right_data_pca['x'], self.right_data_pca['y'], '#FF2D55')
         self.right_foot_plot.draw()
         
-        if self.hull_button.isChecked(): self.hull_button.set_state(False)
-        if self.elipse_button.isChecked(): self.elipse_button.set_state(False)
+        if self.elipse_button.isChecked():
+            self.elipse_button.set_state(False)
+            if self.left_ellipse_plot:
+                line_lat = self.left_ellipse_plot.pop(0)
+                line_lat.remove()
+                self.left_foot_plot.draw()
+            if self.center_ellipse_plot:
+                line_lat = self.center_ellipse_plot.pop(0)
+                line_lat.remove()
+                self.centro_plot.draw()
+            if self.right_ellipse_plot:
+                line_lat = self.right_ellipse_plot.pop(0)
+                line_lat.remove()
+                self.right_foot_plot.draw()
+        
+        if self.hull_button.isChecked():
+            self.hull_button.set_state(False)
+            if self.left_hull_plot:
+                line_lat = self.left_hull_plot.pop(0)
+                line_lat.remove()
+                self.left_foot_plot.draw()
+            if self.center_hull_plot:
+                line_lat = self.center_hull_plot.pop(0)
+                line_lat.remove()
+                self.centro_plot.draw()
+            if self.right_hull_plot:
+                line_lat = self.right_hull_plot.pop(0)
+                line_lat.remove()
+                self.right_foot_plot.draw()
+        
 
 
 if __name__=="__main__":
