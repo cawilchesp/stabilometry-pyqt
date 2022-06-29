@@ -54,12 +54,37 @@ class App(QWidget):
         self.center_analysis = None
         self.right_analysis = None
 
+        self.left_data_elipse = None
+        self.center_data_elipse = None
+        self.right_data_elipse = None
+
+        self.left_data_convex = None
+        self.center_data_convex = None
+        self.right_data_convex = None
+
+        self.left_data_pca = None
+        self.center_data_pca = None
+        self.right_data_pca = None
+
         self.left_lateral_plot = None
         self.center_lateral_plot = None
         self.right_lateral_plot = None
+
         self.left_ap_plot = None
         self.center_ap_plot = None
         self.right_ap_plot = None
+
+        self.left_ellipse_plot = None
+        self.center_ellipse_plot = None
+        self.right_ellipse_plot = None
+
+        self.left_hull_plot = None
+        self.center_hull_plot = None
+        self.right_hull_plot = None
+
+        self.left_pca_plot = None
+        self.center_pca_plot = None
+        self.right_pca_plot = None
 
         # ----------------
         # Generación de UI
@@ -1289,9 +1314,21 @@ class App(QWidget):
             center_data = pd.merge(self.data_c_lat, self.data_c_ap, right_index = True, left_index = True)
             right_data = pd.merge(self.data_r_lat, self.data_r_ap, right_index = True, left_index = True)
 
-            left_analysis = backend.analisis(left_data)
-            center_analysis = backend.analisis(center_data)
-            right_analysis = backend.analisis(right_data)
+            self.left_analysis = backend.analisis(left_data)
+            self.center_analysis = backend.analisis(center_data)
+            self.right_analysis = backend.analisis(right_data)
+
+            self.left_data_elipse = backend.ellipseStandard(left_data)
+            self.center_data_elipse = backend.ellipseStandard(center_data)
+            self.right_data_elipse = backend.ellipseStandard(right_data)
+
+            self.left_data_convex = backend.convexHull(left_data)
+            self.center_data_convex = backend.convexHull(center_data)
+            self.right_data_convex = backend.convexHull(right_data)
+
+            self.left_data_pca = backend.ellipsePCA(left_data)
+            self.center_data_pca = backend.ellipsePCA(center_data)
+            self.right_data_pca = backend.ellipsePCA(right_data)
 
             # self.data_lat_max = results['lat_max']
             # self.data_lat_t_max = results['lat_t_max']
@@ -1339,27 +1376,21 @@ class App(QWidget):
             # --------------
             # Gráficas Áreas
             # --------------
-    #         data_elipse = backend.ellipseStandard(df)
             self.left_foot_plot.axes.cla()
             self.left_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
             self.left_foot_plot.axes.scatter(self.data_l_lat, self.data_l_ap, marker='.', color='#FF0000')
-            # self.left_foot_plot.axes.plot(data_elipse['x'], data_elipse['y'], '#FF2D55')
             self.left_foot_plot.axes.axis('equal')
             self.left_foot_plot.draw()
 
-    #         data_convex = backend.convexHull(df)
             self.centro_plot.axes.cla()
             self.centro_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
             self.centro_plot.axes.scatter(self.data_c_lat, self.data_c_ap, marker='.', color='#00FF00')
-            # self.centro_plot.axes.fill(data_convex['x'], data_convex['y'], edgecolor='#FF2D55', fill=False, linewidth=2)
             self.centro_plot.axes.axis('equal')
             self.centro_plot.draw()
 
-    #         data_pca = backend.ellipsePCA(df)
             self.right_foot_plot.axes.cla()
             self.right_foot_plot.fig.subplots_adjust(left=0.1, bottom=0.1, right=1, top=0.95, wspace=0, hspace=0)
             self.right_foot_plot.axes.scatter(self.data_r_lat, self.data_r_ap, marker='.', color='#0000FF')
-            # self.right_foot_plot.axes.plot(data_pca['x'], data_pca['y'], '#FF2D55')
             self.right_foot_plot.axes.axis('equal')
             self.right_foot_plot.draw()
 
@@ -1370,45 +1401,45 @@ class App(QWidget):
             # --------------------------
             # Presentación de resultados
             # --------------------------
-            self.left_lat_rango_value.setText(f'{left_analysis["lat_rango"]:.2f}')
-            self.center_lat_rango_value.setText(f'{center_analysis["lat_rango"]:.2f}')
-            self.right_lat_rango_value.setText(f'{right_analysis["lat_rango"]:.2f}')
-            self.left_lat_vel_value.setText(f'{left_analysis["lat_vel"]:.2f}')
-            self.center_lat_vel_value.setText(f'{center_analysis["lat_vel"]:.2f}')
-            self.right_lat_vel_value.setText(f'{right_analysis["lat_vel"]:.2f}')
-            self.left_lat_rms_value.setText(f'{left_analysis["lat_rms"]:.2f}')
-            self.center_lat_rms_value.setText(f'{center_analysis["lat_rms"]:.2f}')
-            self.right_lat_rms_value.setText(f'{right_analysis["lat_rms"]:.2f}')
+            self.left_lat_rango_value.setText(f'{self.left_analysis["lat_rango"]:.2f}')
+            self.center_lat_rango_value.setText(f'{self.center_analysis["lat_rango"]:.2f}')
+            self.right_lat_rango_value.setText(f'{self.right_analysis["lat_rango"]:.2f}')
+            self.left_lat_vel_value.setText(f'{self.left_analysis["lat_vel"]:.2f}')
+            self.center_lat_vel_value.setText(f'{self.center_analysis["lat_vel"]:.2f}')
+            self.right_lat_vel_value.setText(f'{self.right_analysis["lat_vel"]:.2f}')
+            self.left_lat_rms_value.setText(f'{self.left_analysis["lat_rms"]:.2f}')
+            self.center_lat_rms_value.setText(f'{self.center_analysis["lat_rms"]:.2f}')
+            self.right_lat_rms_value.setText(f'{self.right_analysis["lat_rms"]:.2f}')
 
-            self.left_ap_rango_value.setText(f'{left_analysis["ap_rango"]:.2f}')
-            self.center_ap_rango_value.setText(f'{center_analysis["ap_rango"]:.2f}')
-            self.right_ap_rango_value.setText(f'{right_analysis["ap_rango"]:.2f}')
-            self.left_ap_vel_value.setText(f'{left_analysis["ap_vel"]:.2f}')
-            self.center_ap_vel_value.setText(f'{center_analysis["ap_vel"]:.2f}')
-            self.right_ap_vel_value.setText(f'{right_analysis["ap_vel"]:.2f}')
-            self.left_ap_rms_value.setText(f'{left_analysis["ap_rms"]:.2f}')
-            self.center_ap_rms_value.setText(f'{center_analysis["ap_rms"]:.2f}')
-            self.right_ap_rms_value.setText(f'{right_analysis["ap_rms"]:.2f}')
+            self.left_ap_rango_value.setText(f'{self.left_analysis["ap_rango"]:.2f}')
+            self.center_ap_rango_value.setText(f'{self.center_analysis["ap_rango"]:.2f}')
+            self.right_ap_rango_value.setText(f'{self.right_analysis["ap_rango"]:.2f}')
+            self.left_ap_vel_value.setText(f'{self.left_analysis["ap_vel"]:.2f}')
+            self.center_ap_vel_value.setText(f'{self.center_analysis["ap_vel"]:.2f}')
+            self.right_ap_vel_value.setText(f'{self.right_analysis["ap_vel"]:.2f}')
+            self.left_ap_rms_value.setText(f'{self.left_analysis["ap_rms"]:.2f}')
+            self.center_ap_rms_value.setText(f'{self.center_analysis["ap_rms"]:.2f}')
+            self.right_ap_rms_value.setText(f'{self.right_analysis["ap_rms"]:.2f}')
 
-            self.left_cop_vel_value.setText(f'{left_analysis["centro_vel"]:.2f}')
-            self.center_cop_vel_value.setText(f'{center_analysis["centro_vel"]:.2f}')
-            self.right_cop_vel_value.setText(f'{right_analysis["centro_vel"]:.2f}')
-            self.left_distancia_value.setText(f'{left_analysis["centro_dist"]:.2f}')
-            self.center_distancia_value.setText(f'{center_analysis["centro_dist"]:.2f}')
-            self.right_distancia_value.setText(f'{right_analysis["centro_dist"]:.2f}')
-            self.left_frecuencia_value.setText(f'{left_analysis["centro_frec"]:.2f}')
-            self.center_frecuencia_value.setText(f'{center_analysis["centro_frec"]:.2f}')
-            self.right_frecuencia_value.setText(f'{right_analysis["centro_frec"]:.2f}')
+            self.left_cop_vel_value.setText(f'{self.left_analysis["centro_vel"]:.2f}')
+            self.center_cop_vel_value.setText(f'{self.center_analysis["centro_vel"]:.2f}')
+            self.right_cop_vel_value.setText(f'{self.right_analysis["centro_vel"]:.2f}')
+            self.left_distancia_value.setText(f'{self.left_analysis["centro_dist"]:.2f}')
+            self.center_distancia_value.setText(f'{self.center_analysis["centro_dist"]:.2f}')
+            self.right_distancia_value.setText(f'{self.right_analysis["centro_dist"]:.2f}')
+            self.left_frecuencia_value.setText(f'{self.left_analysis["centro_frec"]:.2f}')
+            self.center_frecuencia_value.setText(f'{self.center_analysis["centro_frec"]:.2f}')
+            self.right_frecuencia_value.setText(f'{self.right_analysis["centro_frec"]:.2f}')
 
-            # self.left_elipse_value.setText(f'{data_elipse["area"]:.2f}')
-            # self.center_elipse_value.setText(f'{data_elipse["area"]:.2f}')
-            # self.right_elipse_value.setText(f'{data_elipse["area"]:.2f}')
-            # self.left_hull_value.setText(f'{data_convex["area"]:.2f}')
-            # self.center_hull_value.setText(f'{data_convex["area"]:.2f}')
-            # self.right_hull_value.setText(f'{data_convex["area"]:.2f}')
-            # self.left_pca_value.setText(f'{data_pca["area"]:.2f}')
-            # self.center_pca_value.setText(f'{data_pca["area"]:.2f}')
-            # self.right_pca_value.setText(f'{data_pca["area"]:.2f}')
+            self.left_elipse_value.setText(f'{self.left_data_elipse["area"]:.2f}')
+            self.center_elipse_value.setText(f'{self.center_data_elipse["area"]:.2f}')
+            self.right_elipse_value.setText(f'{self.right_data_elipse["area"]:.2f}')
+            self.left_hull_value.setText(f'{self.left_data_convex["area"]:.2f}')
+            self.center_hull_value.setText(f'{self.center_data_convex["area"]:.2f}')
+            self.right_hull_value.setText(f'{self.right_data_convex["area"]:.2f}')
+            self.left_pca_value.setText(f'{self.left_data_pca["area"]:.2f}')
+            self.center_pca_value.setText(f'{self.center_data_pca["area"]:.2f}')
+            self.right_pca_value.setText(f'{self.right_data_pca["area"]:.2f}')
 
     #         # -------------
     #         # Base de datos
@@ -1646,22 +1677,62 @@ class App(QWidget):
     def on_elipse_button_clicked(self) -> None:
         """ Ellipse option for segmented buttons """
         self.elipse_button.set_state(True)
+        self.left_ellipse_plot = self.left_foot_plot.axes.plot(self.left_data_elipse['x'], self.left_data_elipse['y'], '#FF2D55')
+        self.left_foot_plot.draw()
+        self.center_ellipse_plot = self.centro_plot.axes.plot(self.center_data_elipse['x'], self.center_data_elipse['y'], '#FF2D55')
+        self.centro_plot.draw()
+        self.right_ellipse_plot = self.right_foot_plot.axes.plot(self.right_data_elipse['x'], self.right_data_elipse['y'], '#FF2D55')
+        self.right_foot_plot.draw()
         
-        if self.hull_button.isChecked(): self.hull_button.set_state(False)
-        if self.oriented_button.isChecked(): self.oriented_button.set_state(False)
+        if self.hull_button.isChecked():
+            self.hull_button.set_state(False)
+            if self.left_hull_plot:
+                line_lat = self.left_hull_plot.pop(0)
+                line_lat.remove()
+                self.left_foot_plot.draw()
+            if self.center_hull_plot:
+                line_lat = self.center_hull_plot.pop(0)
+                line_lat.remove()
+                self.centro_plot.draw()
+            if self.right_hull_plot:
+                line_lat = self.right_hull_plot.pop(0)
+                line_lat.remove()
+                self.right_foot_plot.draw()
+
+        if self.oriented_button.isChecked():
+            self.oriented_button.set_state(False)
+
+
+        
 
 
     def on_hull_button_clicked(self) -> None:
         """ Hull option for segmented buttons """
         self.hull_button.set_state(True)
+        self.left_hull_plot = self.left_foot_plot.axes.fill(self.left_data_convex['x'], self.left_data_convex['y'], edgecolor='#FF2D55', fill=False, linewidth=2)
+        self.left_foot_plot.draw()
+        self.center_hull_plot = self.centro_plot.axes.fill(self.center_data_convex['x'], self.center_data_convex['y'], edgecolor='#FF2D55', fill=False, linewidth=2)
+        self.centro_plot.draw()
+        self.right_hull_plot = self.right_foot_plot.axes.fill(self.right_data_convex['x'], self.right_data_convex['y'], edgecolor='#FF2D55', fill=False, linewidth=2)
+        self.right_foot_plot.draw()
         
         if self.elipse_button.isChecked(): self.elipse_button.set_state(False)
         if self.oriented_button.isChecked(): self.oriented_button.set_state(False)
+
+   
+
+        
 
 
     def on_oriented_button_clicked(self) -> None:
         """ Oriented ellipse for segmented buttons """
         self.oriented_button.set_state(True)
+        self.left_pca_plot = self.left_foot_plot.axes.plot(self.left_data_pca['x'], self.left_data_pca['y'], '#FF2D55')
+        self.left_foot_plot.draw()
+        self.center_pca_plot = self.centro_plot.axes.plot(self.center_data_pca['x'], self.center_data_pca['y'], '#FF2D55')
+        self.centro_plot.draw()
+        self.right_pca_plot = self.right_foot_plot.axes.plot(self.right_data_pca['x'], self.right_data_pca['y'], '#FF2D55')
+        self.right_foot_plot.draw()
         
         if self.hull_button.isChecked(): self.hull_button.set_state(False)
         if self.elipse_button.isChecked(): self.elipse_button.set_state(False)
