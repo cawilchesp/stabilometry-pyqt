@@ -865,7 +865,7 @@ class AboutApp(QtWidgets.QDialog):
 
 
         self.about_card = mt3.Card(self, 'about_card',
-            (8, 8, width-16, height-16), ('Test de Romberg', "Romberg's Test"), 
+            (8, 8, width-16, height-16), ('Estabilometría', 'Stabilometry'), 
             self.theme_value, self.language_value)
 
         y, w = 48, width - 32
