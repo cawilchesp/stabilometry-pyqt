@@ -11,6 +11,7 @@ This file contains supplementary methods and classes applied to the frontend.
 """
 
 from turtle import width
+from typing import Tuple
 from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt, QSettings
@@ -74,18 +75,42 @@ class MPLCanvas(FigureCanvasQTAgg):
 # ----------------------
 # Extracción de la Señal
 # ----------------------
-def convert_cv_qt(cv_img):
-    """Convert from an opencv image to QPixmap"""
+def convert_cv_qt(cv_img: np.array) -> QPixmap:
+    """ Convert OpenCV image to QPixmap
+    
+    Parameters
+    ----------
+    cv_img: np.array
+        Image in OpenCV format
+
+    Returns
+    -------
+    qt_img: QPixmap
+        Image in QPixmap format
+    """
     rgb_image = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
     h, w, ch = rgb_image.shape
     bytes_per_line = ch * w
     convert_to_Qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format.Format_RGB888)
     p = convert_to_Qt_format.scaled(1280, 720, Qt.AspectRatioMode.KeepAspectRatio)
-    return QPixmap.fromImage(p)
+    qt_img = QPixmap.fromImage(p)
+    
+    return qt_img
 
 
-def image_ocr(image):
-    """ Extract text from image """
+def image_ocr(image: np.array) -> tuple:
+    """ Extract text from image
+    
+    Parameters
+    ----------
+    image: np.array
+        Region of image with the oscillation limits to extract
+
+    Returns
+    -------
+    ap, lat: tuple
+        Signal antero-posterior (ap) and lateral (lat) maximum an minimum limits
+    """
     pytesseract.pytesseract.tesseract_cmd = 'C:/Tesseract-OCR/tesseract.exe'
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -136,7 +161,20 @@ def image_ocr(image):
     return ap,lat
 
 
-def image_signal(image, limits):
+def image_signal(image: np.array, limits: tuple) -> pd.DataFrame:
+    """ Signal extraction and reconstruction from image region and limits 
+        extracted from OCR analysis
+    
+    Parameters
+    ----------
+    image: np.array
+        Region of image with the signal to extract
+
+    Returns
+    -------
+    y, t: pd.DataFrame
+        Signal y and t data points
+    """
     width = image.shape[1]
     rango = float(limits[0] - limits[1])
     data = cv2.findNonZero(image)
@@ -172,7 +210,19 @@ def image_signal(image, limits):
     return y[1:], t[1:]
 
 
-def extract(image_file: str) -> pd.DataFrame:
+def extract(image_file: str) -> dict:
+    """ Extraction of oscillation limits from input image
+    
+    Parameters
+    ----------
+    image_file: str
+        Input image file path
+
+    Returns
+    -------
+    signals: dict
+        Lateral and antero-posterior signal data by feet
+    """
     image = cv2.imread(image_file)
 
     # OCR
