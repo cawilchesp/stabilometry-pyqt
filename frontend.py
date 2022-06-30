@@ -734,7 +734,7 @@ class App(QWidget):
         self.centro_plot_card.apply_styleSheet(state)
         self.right_foot_plot_card.apply_styleSheet(state)
 
-        # self.lateral_plot.apply_styleSheet(state)
+        self.lateral_plot.apply_styleSheet(state)
         # if self.lat_text_1:
         #     self.lat_text_1.remove()
         #     self.lat_text_2.remove()
@@ -744,8 +744,8 @@ class App(QWidget):
         #     else:
         #         self.lat_text_1 = self.lateral_plot.axes.text(self.data_lat_t_max, self.data_lat_max, f'{self.data_lat_max:.2f}', color='#E5E9F0')
         #         self.lat_text_2 = self.lateral_plot.axes.text(self.data_lat_t_min, self.data_lat_min, f'{self.data_lat_min:.2f}', color='#E5E9F0')
-        # self.lateral_plot.draw()
-        # self.antePost_plot.apply_styleSheet(state)
+        self.lateral_plot.draw()
+        self.antePost_plot.apply_styleSheet(state)
         # if self.ap_text_1:
         #     self.ap_text_1.remove()
         #     self.ap_text_2.remove()
@@ -755,13 +755,13 @@ class App(QWidget):
         #     else:
         #         self.ap_text_1 = self.antePost_plot.axes.text(self.data_ap_t_max, self.data_ap_max, f'{self.data_ap_max:.2f}', color='#E5E9F0')
         #         self.ap_text_2 = self.antePost_plot.axes.text(self.data_ap_t_min, self.data_ap_min, f'{self.data_ap_min:.2f}', color='#E5E9F0')
-        # self.antePost_plot.draw()
-        # self.left_foot_plot.apply_styleSheet(state)
-        # self.left_foot_plot.draw()
-        # self.centro_plot.apply_styleSheet(state)
-        # self.centro_plot.draw()
-        # self.right_foot_plot.apply_styleSheet(state)
-        # self.right_foot_plot.draw()
+        self.antePost_plot.draw()
+        self.left_foot_plot.apply_styleSheet(state)
+        self.left_foot_plot.draw()
+        self.centro_plot.apply_styleSheet(state)
+        self.centro_plot.draw()
+        self.right_foot_plot.apply_styleSheet(state)
+        self.right_foot_plot.draw()
 
         self.lateral_card.apply_styleSheet(state)
         self.lat_rango_label.apply_styleSheet(state)
